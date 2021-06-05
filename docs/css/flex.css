@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+section {
+  padding: 10px;
+  margin: 10px;
+}
+pre {
+  border: solid 1px #888;
+  padding: 0 10px;
+  background-color: #f9f9f9;
+  width: 500px;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+h2 {
+  margin: 0;
+}
+.container {
+  box-sizing: border-box;
+  width: 500px;
+  height: 200px;
+  border: solid 1px #AAA;
+  display: flex;
+}
+.item {
+  border: solid 1px #88F;
+  width: 50px;
+  height: 50px;
+}
+.item1 {
+  background-color: #fdd;
+}
+.item2 {
+  background-color: #dfd;
+}
+.item3 {
+  background-color: #ddf;
+}
+.item4 {
+  background-color: #ffb;
+}
+.item5 {
+  background-color: #fbf;
+}
+.sec2 .container {
+  flex-flow: row wrap;
+}
+.sec3 .container {
+  flex-flow: row wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+.sec3 .item {
+  flex-basis: 20%;
+}
+.sec4 .item {
+  flex-basis: 15%;
+}
+.sec4 .item3 {
+  margin-left: auto;
+}
+.sec5 .item2 {
+  flex-grow: 1
+}
+.sec5 .item3 {
+  flex-grow: 2
+}
+.sec5 .item4 {
+  flex-grow: 3
+}
+.sec5 .item5 {
+  flex-grow: 4
+}
+.sec6 .item {
+  flex-basis: 30%;
+}
+.sec6 .item2 {
+  flex-shrink: 1
+}
+.sec6 .item3 {
+  flex-shrink: 2
+}
+.sec6 .item4 {
+  flex-shrink: 3
+}
