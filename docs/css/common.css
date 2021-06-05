@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+h1 {
+  margin: 10px 0 20px;
+  font-size: 1.8em;
+  border-bottom: solid 1px #aaa;
+}
+.title {
+  position: relative;
+}
+.title a {
+  position: absolute;
+  right: 15px;
+  font-size: 14px;
+  bottom: 10px;
+  color: blue;
+}
+
+textarea {
+  padding: 10px 15px;
+  line-height: 1.5;
+}

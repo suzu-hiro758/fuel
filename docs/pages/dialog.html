@@ -1,0 +1,28 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/dialog.css">
+    <script defer src="../js/dialog.js"></script>
+  </head>
+  <body>
+    <h1 class="title">HTML ダイアログ <a href="../">TOP</a></h1>
+    <button id="open-button">ダイアログを開く</button>
+    <button id="clear-button">クリア</button>
+    <div style="margin-top: 10px;">
+      <textarea id="output"></textarea>
+    </div>
+    <dialog id="dialog">
+      <header>タイトル<span class="close-icon">X</span></header>
+      <section>
+        <div>何か書く</div>
+        <textarea id="modal-text"></textarea>
+      </section>
+      <div class="buttons">
+        <button id="close-button">閉じる</button>
+        <button id="submit-button">保存</button>
+      </div>
+    </dialog>
+  </body>
+</html>
