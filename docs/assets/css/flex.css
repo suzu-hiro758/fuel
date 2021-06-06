@@ -1,27 +1,5 @@
 @charset "UTF-8";
 
-section {
-  padding: 10px;
-  margin: 10px;
-}
-pre {
-  border: solid 1px #888;
-  padding: 0 10px;
-  background-color: #f9f9f9;
-  width: 500px;
-  box-sizing: border-box;
-  margin-top: 0;
-}
-h2 {
-  margin: 0;
-}
-.container {
-  box-sizing: border-box;
-  width: 500px;
-  height: 200px;
-  border: solid 1px #AAA;
-  display: flex;
-}
 .item {
   border: solid 1px #88F;
   width: 50px;

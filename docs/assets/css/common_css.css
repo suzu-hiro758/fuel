@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+section {
+  padding: 10px;
+  margin: 10px;
+}
+.content {
+  display: flex;
+}
+.content .code {
+  width: 300px;
+  margin-left: 10px;
+  height: 200px;
+  overflow: auto;
+  border: solid 1px #888;
+  padding: 0 10px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+.content .code pre {
+  margin: 0;
+}
+h2 {
+  margin: 0;
+}
+.viewer {
+  box-sizing: border-box;
+  width: 500px;
+  height: 200px;
+  border: solid 1px #AAA;
+  display: flex;
+}
