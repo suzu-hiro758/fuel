@@ -2,12 +2,52 @@
   <head>
     <meta name="robots" content="noindex">
     <link rel="stylesheet" type="text/css" href=".assets/css/common.css">
+    <style>
+      .menu {
+        display: flex;
+        width: 900px;
+        column-gap: 10px;
+        flex-basis: 390px;
+      }
+      .menu h3 {
+        margin: 0;
+      }
+      .menu > div {
+        flex-basis: 290px
+      }
+      .menu ul {
+        padding-left: 30px;
+      }
+    </style>
   </head>
   <body>
     <h1>TOP</h1>
-    <ul>
-      <li><a href="./css/flex.html">flexbox</a></li>
-      <li><a href="./html/dialog.html">dialog</a></li>
-    </ul>
+    <div class="menu">
+      <div>
+        <h3>Javascript</h3>
+        <ul>
+          <li>IntersectionObserver</li>
+          <li>MutationObserver</li>
+          <li>scrollIntoView</li>
+          <li>Ploxy</li>
+          <li>performance</li>
+        </ul>
+      </div>
+      <div>
+        <h3>HTML</h3>
+        <ul>
+          <li><a href="./html/dialog.html">dialog</a></li>
+          <li>form</li>
+          <li>details</li>
+        </ul>
+      </div>
+      <div>
+        <h3>CSS</h3>
+        <ul>
+          <li><a href="./css/flex.html">flexbox</a></li>
+          <li><a href="./css/grid.html">grid layout</a></li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
