@@ -4,6 +4,7 @@
     <meta name="robots" content="noindex">
     <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/dialog.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
     <script defer src="../assets/js/dialog.js"></script>
   </head>
   <body>
@@ -14,7 +15,7 @@
       <textarea id="output"></textarea>
     </div>
     <pre>
-<code>&lt;dialog id="dialog"&gt;
+<code class="language-html">&lt;dialog id="dialog"&gt;
   &lt;header&gt;タイトル&lt;span class="close-icon"&gt;X&lt;/span&gt;&lt;/header&gt;
   &lt;section&gt;
     &lt;div&gt;何か書く&lt;/div&gt;
@@ -26,7 +27,20 @@
   &lt;/div&gt;
 &lt;/dialog&gt;</code></pre>
     <pre>
-<code style="margin: 0;">const dialog = document.getElementById('dialog');
+<code class="language-css">dialog {
+  width: 400px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+dialog::backdrop {
+  /* 背景を半透明のブラックにする */
+  background-color: rgba(0, 0, 0, .1);
+}</code>
+    </pre>
+    <pre>
+<code class="language-javascript">const dialog = document.getElementById('dialog');
 const openBtn = document.getElementById('open-button');
 const closeBtn = document.getElementById('close-button');
 const clearBtn = document.getElementById('clear-button');
@@ -83,5 +97,6 @@ clearBtn.addEventListener('click', () => {
         <button id="submit-button">保存</button>
       </div>
     </dialog>
+    <script src="../lib/prism/prism.js"></script>
   </body>
 </html>
