@@ -1,0 +1,194 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" />
+    <style>
+      section {
+        margin-bottom: 50px;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .view {
+        position: relative;
+        width: 500px;
+        height: 260px;
+        border: solid 1px #888;
+        overflow: auto;
+      }
+      .item {
+        width: 200px;
+        height: 160px;
+        margin: 60px auto;
+        border: var(--container-border)
+      }
+      .target {
+        border: solid 1px #aaf;
+        background: linear-gradient(#ffc 50%, #ddf 50%);
+      }
+      textarea {
+        width: 380px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">HTML ダイアログ <a href="../">TOP</a></h1>
+    <main>
+      <div style="margin-bottom: 30px;">
+      <h2>基本仕様</h2>
+        <pre>
+<code class="language-javascript">// オプションの指定
+const options = {
+  root: document.getEelementById('root'), // 外枠
+  // root の周りのマージンです。CSS margin プロパティに似た値を持つことができます。
+  // 例えば、"10px 20px 30px 40px" (top, right, bottom, left) のようなものです。
+  // この値はパーセント値にすることができます。
+  // この一連の値は、交差を計算する前にルート要素の範囲のボックスの各辺を拡大または縮小させることができます。
+  // 既定ではすべてゼロです。
+  rootMargin: '0px',
+  // 単一の数値もしくは数値の配列で、
+  // コールバックを実行するターゲットがどのくらいの割合で見えているかを示します
+  // 既定値は 0 です (つまり、1ピクセルでも表示されるとコールバックが実行されます)。
+  // 1.0 の値は全てのピクセルが見えるようになるまで、閾値をまたいだとみなされないことを意味します。
+  threshold: 1.0 
+}
+const observer = new IntersectionObserver((entries) => {
+  // コールバック処理
+}, options);
+// ターゲットを指定して監視
+observer.observe(document.getElementById('target'));</code>
+        </pre>
+      </div>
+      <section>
+        <h2>少しでも表示されたらイベント発生</h2>
+        <pre>
+<code class="language-javascript">{
+    rootMargin: '0px',
+}</code>
+        </pre>
+        <div class="container">
+          <div class="view">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item target">target</div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <textarea wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+      <section>
+        <h2>すべて表示してからイベント発生</h2>
+        <pre>
+<code class="language-javascript">{
+    rootMargin: '0px',
+    threshold: 1.0 
+}</code>
+        </pre>
+        <div class="container">
+          <div class="view">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item target">target</div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <textarea wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+      <section>
+        <h2>threshold 複数指定</h2>
+        <pre>
+<code class="language-javascript">{
+    rootMargin: '0px',
+    threshold: [0, 0.5, 1.0] 
+}</code>
+        </pre>
+        <div class="container">
+          <div class="view">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item target">target</div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <textarea wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+      <section>
+        <h2>rootMargin を広げて、見える前にイベント発生</h2>
+        <pre>
+<code class="language-javascript">{
+    rootMargin: '80px',
+}</code>
+        </pre>
+        <div class="container">
+          <div class="view">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item target">target</div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <textarea wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+      <section>
+        <h2>rootMargin マイナス指定し、中央に来てからイベント発生</h2>
+        <pre>
+<code class="language-javascript">{
+    rootMargin: '-50% 0px -50% 0px',
+}</code>
+        </pre>
+        <div class="container">
+          <div class="view">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item target">target</div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <textarea wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script>
+      
+function createIntersectionObserver (idx, option) {
+  const container = document.getElementsByTagName('section').item(idx);
+  const root = container.getElementsByClassName('view')[0];
+  const target = container.getElementsByClassName('target')[0];
+  const log = container.getElementsByTagName('textarea').item(0);
+
+  function callback([entry]) {
+    if (!entry.isIntersecting) return;
+    log.value += `----------------------------\n  intersectionRatio: ${entry.intersectionRatio}\n  root.scrollTop: ${root.scrollTop}\n`;
+  }
+
+  const options = {
+    root,
+    ...option
+  }
+
+  const observer = new IntersectionObserver(callback, options);
+  observer.observe(target);
+}
+
+function initializer() {
+  let idx = 0;
+  createIntersectionObserver(idx++, { rootMargin: '0px' })
+  createIntersectionObserver(idx++, { rootMargin: '0px', threshold: 1.0 })
+  createIntersectionObserver(idx++, { rootMargin: '0px', threshold: [0, 0.5, 1.0] })
+  createIntersectionObserver(idx++, { rootMargin: '80px' })
+  createIntersectionObserver(idx++, { rootMargin: '-50% 0px -50% 0px' })
+}
+
+window.addEventListener('DOMContentLoaded', initializer);
+    </script>
+  </body>
+</html>

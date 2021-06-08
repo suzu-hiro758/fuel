@@ -12,7 +12,7 @@ section {
   margin-left: 10px;
   height: 220px;
   overflow: auto;
-  border: solid 1px #888;
+  border: var(--container-border);
   box-sizing: border-box;
 }
 .content .code pre {
@@ -27,6 +27,6 @@ h2 {
   box-sizing: border-box;
   width: 500px;
   height: 220px;
-  border: solid 1px #AAA;
+  border: var(--container-border);
   display: flex;
 }

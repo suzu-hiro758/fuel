@@ -1,7 +1,18 @@
 @charset "UTF-8";
 
+:root {
+  --content-width: 900px;
+  --container-border: solid 1px #999;
+}
+main {
+  margin: 0 auto;
+  padding-bottom: 30px;
+  width: var(--content-width);
+}
+
 h1 {
-  margin: 14px 0 26px;
+  margin: 14px auto 26px;
+  width: var(--content-width);
   font-size: 1.8em;
   border-bottom: solid 1px #aaa;
 }
