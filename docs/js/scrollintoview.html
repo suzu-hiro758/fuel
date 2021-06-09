@@ -1,0 +1,160 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro frontend tips</title>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" />
+    <style>
+      section {
+        margin-bottom: 50px;
+      }
+      dl {
+        margin-left: 1em;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .view {
+        position: relative;
+        width: 500px;
+        height: 450px;
+        border: solid 1px #888;
+        overflow: auto;
+      }
+      .item-group {
+        display: flex;
+        width: 1300px;
+        flex-wrap: nowrap;
+      }
+      .item {
+        width: 140px;
+        height: 140px;
+        margin: 40px;
+        border: var(--container-border)
+      }
+      .target {
+        border: solid 1px #aaf;
+        background: #ffc;
+      }
+      .buttons {
+        width: 380px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">IntersectionObserver <a href="../">TOP</a></h1>
+    <main>
+      <div style="margin-bottom: 30px;">
+        <h2>構文</h2>
+        <pre>
+<code class="language-javascript">element.scrollIntoView();
+element.scrollIntoView(alignToTop); // 論理型の引数
+element.scrollIntoView(scrollIntoViewOptions); // オブジェクト型の引数</code>
+        </pre>
+        <h3>alignToTop</h3>
+        <ul>
+          <li>true の場合、要素の上端がスクロール可能な祖先の表示範囲の上端に来るようにスクロールします。<br> scrollIntoViewOptions: {block: "start", inline: "nearest"} に相当します。これが既定値です。
+</li>
+          <li>false の場合、要素の下端がスクロール可能祖先の表示範囲の下端に来るようにスクロールします。 <br>scrollIntoViewOptions: {block: "end", inline: "nearest"} に相当します。
+</li>
+        </ul>
+        <h3>scrollIntoViewOptions</h3> 
+        <dl>
+          <dt>behavior 省略可</dt>
+          <dd>
+            推移のアニメーションを定義します。
+            auto または smooth のどちらかです。既定値は auto です。</dd>
+          <dt>block 省略可</dt>
+          <dd>
+            垂直方向の配置を定義します。
+            start, center, end, nearest の何れかです。既定値は start です。
+          </dd>
+          <dt>inline 省略可</dt>
+          <dd>
+            水平方法の配置を定義します。
+            start, center, end, nearest の何れかです。既定値は nearest です。
+          </dd>
+        </dl>
+      </div>
+      <section>
+        <h2>動作確認</h2>
+        <div class="container">
+          <div class="view">
+            <div class="item-group">
+              <div class="item">1</div>
+              <div class="item">2</div>
+              <div class="item">3</div>
+              <div class="item">4</div>
+              <div class="item">5</div>
+            </div>
+            <div class="item-group">
+              <div class="item">6</div>
+              <div class="item">7</div>
+              <div class="item">8</div>
+              <div class="item">9</div>
+              <div class="item">10</div>
+            </div>
+            <div class="item-group">
+              <div class="item">11</div>
+              <div class="item">12</div>
+              <div class="item target">target</div>
+              <div class="item">14</div>
+              <div class="item">15</div>
+            </div>
+            <div class="item-group">
+              <div class="item">16</div>
+              <div class="item">17</div>
+              <div class="item">18</div>
+              <div class="item">19</div>
+              <div class="item">20</div>
+            </div>
+            <div class="item-group">
+              <div class="item">21</div>
+              <div class="item">22</div>
+              <div class="item">23</div>
+              <div class="item">24</div>
+              <div class="item">25</div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button data-block="start" data-inline="start"></button>
+            <button data-block="start" data-inline="center"></button>
+            <button data-block="start" data-inline="end"></button>
+            <button data-block="center" data-inline="start"></button>
+            <button data-block="center" data-inline="center"></button>
+            <button data-block="center" data-inline="end"></button>
+            <button data-block="end" data-inline="start"></button>
+            <button data-block="end" data-inline="center"></button>
+            <button data-block="end" data-inline="end"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script>
+      let target;
+
+      function clickButton(e) {
+        const option = e.target.dataset;
+        target.scrollIntoView({ ...option, behavior: 'smooth'});
+      }
+
+      function initializer() {
+        target = document.getElementsByClassName('target')[0];
+
+        document.querySelectorAll('.buttons button').forEach(button => {
+          button.addEventListener('click', clickButton);
+          button.textContent = `block: ${button.dataset.block},　inline: ${button.dataset.inline}`;
+        })
+      }
+
+      window.addEventListener('DOMContentLoaded', initializer);
+    </script>
+  </body>
+</html>
