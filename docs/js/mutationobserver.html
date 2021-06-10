@@ -1,0 +1,111 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro's frontend tips</title>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link href="../assets/css/mutation.css" rel="stylesheet" />
+    <link href="../lib/prism/prism.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1 class="title">MutationObserver <a href="../">TOP</a></h1>
+    <main>
+      <div style="margin-bottom: 30px;">
+        <h2>基本仕様</h2>
+        <h3>使い方</h3>
+        <pre>
+<code class="language-javascript">// オプションの指定
+const options = {
+  childList: true, // 子ノード（テキストのノードも含む）
+  subtree: true, // 子孫ノードの変化
+  attributes: true, // 属性に対する変更
+}
+const observer = new MutationObserver((mutationRecords) => {
+  // コールバック処理
+}, options);
+// ターゲットを指定して監視
+observer.observe(document.getElementById('target'));</code>
+        </pre>
+        <h3>config</h3>
+        <ul>
+          <li>childList: boolean – 子ノード（テキストのノードも含む）</li>
+          <li>subtree: boolean – 子孫ノードの変化</li>
+          <li>attributes: boolean – 属性に対する変更</li>
+          <li>attributeOldValue: boolean – 属性の古い値を記録する (attributes が ture の場合),</li>
+          <li>characterData: boolean – node.data テキストコンテンツデータに対する監視</li>
+          <li>characterDataOldValue: boolean – node.data の古い値を記録する (characterData が true の場合),</li>
+          <li>attributeFilter: array – 指定したものだけを監視するための、属性の配列</li>
+        </ul>
+        <h3>mutationRecordsのプロパティ</h3>
+        <ul>
+          <li>
+            type  – mutation(変化)の種類, 次のいずれかです
+            <ul>
+              <li>"attributes" (属性が変更された)</li>
+              <li>"characterData" (データが変更された)</li>
+              <li>"childList" (要素が追加/削除された),</li>
+            </ul>
+          </li>
+          <li>target - 変更が起こった場所: “attributes” の場合は要素, “characterData” の場合はテキストノード, あるいは “childList” の変化の場合は要素です,</li>
+          <li>addedNodes/removedNodes – 追加/削除されたノード,</li>
+          <li>previousSibling/nextSibling – 追加/削除されたノードの前後の兄弟,</li>
+          <li>attributeName/attributeNamespace – 変更された属性の名前/ネームスペース (XMLの場合),</li>
+          <li>oldValue – 以前の値。属性あるいはテキストの変更の場合のみ。</li>
+        </ul>
+        <h3>mutationRecordsサンプル</h3>
+        <pre>
+<code class="language-javascript">// テキストの変更
+mutationRecords = [{
+  type: "characterData",
+  oldValue: "me",
+  target: <text node>,
+  // 他のプロパティは空です
+}];
+// 要素の削除
+mutationRecords = [{
+  type: "childList",
+  target: <div#elem>,
+  removedNodes: [<b>],
+  nextSibling: <text node>,
+  previousSibling: <text node>
+  // 他のプロパティは空です
+}, {
+  type: "characterData"
+  target: <text node>
+  // ...詳細は、ブラウザがどのように変更を処理するかによって異なります。
+  // 2つの隣接するノード "Edit " と ", please" を1つのノードに合体するかもしれません。
+  // あるいは、単に "Edit" の後の余分なスペースを削除する可能性もあります。
+}];</code>
+        </pre>
+      </div>
+      <section>
+        <h2>動作確認</h2>
+        <div class="config">
+          <label><input type="checkbox" name="childList" checked /></label>
+          <label><input type="checkbox" name="subtree" checked /></label>
+          <label><input type="checkbox" name="attributes" checked /></label>
+          <label><input type="checkbox" name="attributeOldValue" checked /></label>
+          <button onclick="create()">observer作成</button>
+        </div>
+        <div class="container">
+          <div class="view">
+            <div class="target"></div>
+            <div class="ctrl">
+              <button onclick="addChild()">子要素を追加</button>
+              <button onclick="addText()">テキストノード追加</button>
+              <button onclick="addGrandChild()">子孫ノード追加</button>
+              <button onclick="deleteChild()">子要素削除</button>
+              <button onclick="updateAttribute()">属性変更</button>
+              <button onclick="clearAll()">クリア</button>
+            </div>
+          </div>
+          <textarea class="log" wrap="off" spellcheck="off"></textarea>
+        </div>
+      </section>
+
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/mutation.js"></script>
+  </body>
+</html>
