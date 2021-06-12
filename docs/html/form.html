@@ -1,0 +1,394 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro's frontend tips</title>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .viewer p {
+        font-size: .9em;
+        margin: 5px 0;
+        color: #444;
+      }
+      form {
+        margin: 0;
+      }
+      output {
+        font-size: .8em;
+      }
+      section > table {
+        width:100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+      section > table td:not(.code) {
+        padding: 5px 10px;
+      }
+      section > table > tbody > tr {
+        border-top: var(--light-border);
+      }
+      section > table > tbody > tr:last-of-type {
+        border-bottom: var(--light-border);
+      }
+      section > table td > pre {
+        margin: 0 !important;
+        padding: 5px 10px !important;
+        font-size: .9em !important;
+      }
+      .validation input:invalid {
+        border-color: red;
+        background-color: #fee;
+      }
+      .validation input:valid {
+        border-color: green;
+        background-color: #efe;
+      }
+      .validation input:read-only {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Form <a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>input</h2>
+        <table>
+          <colgroup>
+            <col width="20%" />
+            <col width="42%" />
+            <col width="38%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>date</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="date" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="date" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>datetime-local</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="datetime-local" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="datetime-local" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>month</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="month" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="month" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>week</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="week" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="week" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>time</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="time" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="time" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>color</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="color" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="color" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>email</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="email" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="email" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>tel</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="tel" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="tel" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>url</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="url" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="url" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>search</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="search" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="search" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>number</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="number" name="n1" id="i1" /> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="number" /&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>range</td>
+              <td>
+                <form oninput="ret.value=n1.value">
+                  <input type="range" name="n1" id="i1" min="-100" max="100" step="5"/> <output name="ret" for="i1" />
+                </form>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input type="range"
+  min="-100" max="100" step="5" /&gt;</code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>その他</h2>
+        <table>
+          <colgroup>
+            <col width="20%" />
+            <col width="42%" />
+            <col width="38%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>progress</td>
+              <td>
+                <progress id="file" max="100" value="70"> 70% </progress>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;progress max="100" value="70"&gt;
+  70%
+&lt;/progress&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>meter</td>
+              <td>
+                <meter
+                  min="0" max="100"
+                  low="33" high="66" optimum="80"
+                  value="50">
+                  at 50/100
+                </meter>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;meter
+  min="0" max="100"
+  low="33" high="66" optimum="80"
+  value="50"&gt;
+  at 50/100
+&lt;/meter&gt;</code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>fieldset</h2>
+        <div class="content">
+          <div class="viewer">
+            <fieldset>
+              <legend>通常</legend>
+              <input /><br/>
+              <label><input type="checkbox" />check</label>
+            </fieldset>
+            <fieldset disabled>
+              <legend>disabled</legend>
+              <input /><br/>
+              <label><input type="checkbox" />check</label>
+            </fieldset>
+            <p>disabledにすると、全体がdisabledになってPOSTされなくなる</p>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;通常&lt;/legend&gt;
+  &lt;input /&gt;
+  &lt;label&gt;&lt;input type="checkbox"/ &gt;check&lt;/label&gt;
+&lt;/fieldset&gt;
+&lt;fieldset disabled&gt;
+  &lt;legend&gt;disabled&lt;/legend&gt;
+  &lt;input /&gt;
+  &lt;label&gt;&lt;input type="checkbox"/ &gt;check&lt;/label&gt;
+&lt;/fieldset&gt;</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>datalist</h2>
+        <div class="content">
+          <div class="viewer">
+            <input list="list-colors"/>
+            <datalist id="list-colors">
+              <option value="red" />
+              <option value="blue" />
+              <option value="green" />
+              <option value="black" />
+            </datalist>
+            <p>前方一致で入力値にマッチするリストに絞られる。cssは効かない？</p>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-html">&lt;input list="list-colors"/&gt;
+&lt;datalist id="list-colors"&gt;
+  &lt;option value="red" /&gt;
+  &lt;option value="blue" /&gt;
+  &lt;option value="green" /&gt;
+  &lt;option value="black" /&gt;
+&lt;/datalist&gt;</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>optgroup</h2>
+        <div class="content">
+          <div class="viewer">
+            <select>
+              <optgroup label="東京都">
+                <option>北区</option>
+                <option>新宿区</option>
+                <option>豊島区</option>
+              </optgroup>
+              <optgroup label="埼玉県">
+                <option>さいたま市</option>
+                <option>浦和市</option>
+                <option>川口市</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-html">&lt;select&gt;
+  &lt;optgroup label="東京都"&gt;
+    &lt;option&gt;北区&lt;/option&gt;
+    &lt;option&gt;新宿区&lt;/option&gt;
+    &lt;option&gt;豊島区&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="埼玉県"&gt;
+    &lt;option&gt;さいたま市&lt;/option&gt;
+    &lt;option&gt;浦和市&lt;/option&gt;
+    &lt;option&gt;川口市&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>input validation</h2>
+        <div class="content">
+          <div class="viewer validation">
+            <form onsubmit="return false" style="display: flex; flex-direction: column; gap: 10px;">
+              <input placeholder="プレースホルダー" required />
+              <input type="tel" pattern="^0[1-9][0-9]?-\d{3,4}-\d{3,4}$" title="電話番号の形式で入力してください" />
+              <input value="読み取り専用" readonly />
+              <div>
+                <input type="radio" name="a" value="1" required /> 犬
+                <input type="radio" name="a" value="2" /> 猫
+              </div>
+              <button type="submit">submit</button>
+            </form>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="html_1" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="css_1" />css
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_1">&lt;form&gt;
+  &lt;input placeholder="プレースホルダー" required /&gt;
+  &lt;input type="tel" pattern="^0[1-9][0-9]?-\d{3,4}-\d{3,4}$" title="電話番号の形式で入力してください" /&gt;
+  &lt;input value="読み取り専用" readonly /&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="a" value="1" required /&gt; 犬
+    &lt;input type="radio" name="a" value="2" /&gt; 猫
+  &lt;/div&gt;
+  &lt;button type="submit"&gt;submit&lt;/button&gt;
+&lt;/form&gt;</code><code class="language-css" id="css_1">input:invalid {
+  border-color: red;
+  background-color: #fcc;
+}
+input:valid {
+  border-color: green;
+  background-color: #cfc;
+}
+input:read-only {
+  background-color: #eee;
+}</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>

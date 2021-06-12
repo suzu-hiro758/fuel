@@ -2,19 +2,20 @@
 
 section {
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0;
 }
 .content {
   display: flex;
 }
 .content .code {
-  width: 350px;
+  width: 450px;
   margin-left: 10px;
   height: 220px;
+  position: relative;
   overflow: auto;
   border: var(--container-border);
   box-sizing: border-box;
-  font-size: .9em;
+  font-size: .8em;
 }
 .content .code pre {
   margin: 0;
@@ -26,8 +27,12 @@ h2 {
 }
 .viewer {
   box-sizing: border-box;
-  width: 500px;
+  width: 420px;
   height: 220px;
   border: var(--container-border);
   display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-flow: row wrap;
+  padding: 10px;
 }
