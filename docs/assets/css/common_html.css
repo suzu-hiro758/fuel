@@ -10,17 +10,15 @@ section {
 .content .code {
   width: 450px;
   margin-left: 10px;
-  height: 220px;
   position: relative;
-  overflow: auto;
-  border: var(--container-border);
   box-sizing: border-box;
   font-size: .8em;
 }
 .content .code pre {
+  height: 220px;
   margin: 0;
-  min-height: 100%;
   box-sizing: border-box;
+  border: var(--container-border);
 }
 h2 {
   margin: 0;
