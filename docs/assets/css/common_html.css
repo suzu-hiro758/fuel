@@ -10,9 +10,6 @@ section {
 .content .code {
   width: 450px;
   margin-left: 10px;
-  position: relative;
-  box-sizing: border-box;
-  font-size: .8em;
 }
 .content .code pre {
   height: 220px;

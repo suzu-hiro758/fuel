@@ -28,8 +28,7 @@
     &lt;button id="close-button"&gt;閉じる&lt;/button&gt;
     &lt;button id="submit-button"&gt;保存&lt;/button&gt;
   &lt;/div&gt;
-&lt;/dialog&gt;</code>
-      </pre>
+&lt;/dialog&gt;</code></pre>
       <pre>
 <code class="language-css">dialog {
   width: 400px;
@@ -41,8 +40,7 @@
 dialog::backdrop {
   /* 背景を半透明のブラックにする */
   background-color: rgba(0, 0, 0, .1);
-}</code>
-      </pre>
+}</code></pre>
       <pre>
 <code class="language-javascript">const dialog = document.getElementById('dialog');
 const openBtn = document.getElementById('open-button');
@@ -88,8 +86,7 @@ dialog.addEventListener('cancel', function(event){
 
 clearBtn.addEventListener('click', () => {
   output.value = '';
-}, false)</code>
-      </pre>
+}, false)</code></pre>
       <dialog id="dialog">
         <header>タイトル<span class="close-icon">X</span></header>
         <section>

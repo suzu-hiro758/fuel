@@ -14,7 +14,6 @@ section {
   overflow: auto;
   border: var(--container-border);
   box-sizing: border-box;
-  font-size: .9em;
 }
 .content .code pre {
   margin: 0;
