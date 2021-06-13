@@ -1,0 +1,201 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro's frontend tips</title>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_css.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" />
+    <style>
+      .viewer {
+        width: 380px;
+        height: 160px;
+      }
+      .content .code {
+        width: 420px;
+        height: 160px;
+      }
+      .item {
+        width: 80%;
+        height: 50%;
+        margin: auto;
+        border: var(--container-border);
+      }
+      .sec1 .item {
+        background: linear-gradient(#ff9999, #99ff99);
+      }
+      .sec2 .item {
+        background: linear-gradient(to right, #ff9999, #99ff99);
+      }
+      .sec3 .item {
+        background: linear-gradient(to bottom right, #ff9999, #99ff99);
+      }
+      .sec4 .item {
+        background: linear-gradient(30deg, #ff9999, #99ff99);
+      }
+      .sec5 .item {
+        background: linear-gradient(90deg, #ff9999, #99ff99, #9999ff);
+      }
+      .sec6 .item {
+        background: linear-gradient(90deg, #ff9999 0%, #99ff99 30%, #9999ff 50%);
+      }
+      .sec7 .item {
+        background: linear-gradient(90deg, #ff9999 30%, #99ff99 30%, #99ff99 70%, #9999ff 70%);
+      }
+      .sec8 .item {
+        background: repeating-linear-gradient(90deg, #ff9999, #ff9999 10px, #99ff99 10px, #99ff99 20px);
+      }
+      .sec9 .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;;
+      }
+      em {
+        background: linear-gradient(0deg, white 20%, #afa 20%, #afa 45%, white 45%);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Gradation <a href="../">TOP</a></h1>
+    <main>
+      <section class="sec1">
+        <h2>基本</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(#ff9999, #99ff99);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec2">
+        <h2>方向</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(to right, #ff9999, #99ff99);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec3">
+        <h2>対角グラデーション</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(to bottom right, #ff9999, #99ff99);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec4">
+        <h2>角度指定</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(30deg, #ff9999, #99ff99);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec5">
+        <h2>3色以上</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(90deg, #ff9999, #99ff99, #9999ff);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec6">
+        <h2>色の配置</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(
+    90deg, #ff9999 0%, #99ff99 30%, #9999ff 50%
+  );
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec7">
+        <h2>不連続線</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: linear-gradient(
+    90deg, #ff9999 30%, #99ff99 30%, #99ff99 70%, #9999ff 70%
+  );
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec8">
+        <h2>反復</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item"></div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item {
+  background: repeating-linear-gradient(
+    90deg, #ff9999, #ff9999 10px, #99ff99 10px, #99ff99 20px
+  );
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec9">
+        <h2>応用：マーカー</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="item">
+              あいうえお<em>重要な単語</em>かきくけこ
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">em {
+  background: linear-gradient(
+    0deg, white 20%, #afa 20%, #afa 45%, white 45%
+  );
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+  </body>
+</html>
