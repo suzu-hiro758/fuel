@@ -1,0 +1,63 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro's frontend tips</title>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      main pre code[class*="language-"] {
+        font-size: 13px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Image <a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>figure</h2>
+        <div class="content middle">
+          <div class="viewer">
+            <figure>
+              <img src="../assets/img/dog.jpg" width="200" height="200">
+              <figcaption>ミニチュアシュナウザー</figcaption>
+            </figure>
+          </div>
+          <div class="code">
+            <pre><code class="language-html">&lt;figure&gt;
+  &lt;img src="../assets/img/dog.jpg" width="200" height="200"&gt;
+  &lt;figcaption&gt;ミニチュアシュナウザー&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>clickable map</h2>
+        <div class="content middle">
+          <div class="viewer">
+            <map name="dogmap">
+              <area shape="rect" coords="20,20,110,210" onclick="alert('左側クリック')"/>
+              <area shape="rect" coords="130,20,210,210" onclick="alert('右側クリック')" />
+            </map>
+            <img usemap="#dogmap" src="../assets/img/dog.jpg" width="230" height="230" style="margin: 20px" />
+          </div>
+          <div class="code">
+            <pre><code class="language-html">&lt;map name="dogmap"&gt;
+  &lt;area shape="rect" coords="20,20,110,210"
+    onclick="alert('左側クリック')"/&gt;
+  &lt;area shape="rect" coords="130,20,210,210"
+    onclick="alert('右側クリック')" /&gt;
+&lt;/map&gt;
+&lt;img usemap="#dogmap" src="../assets/img/dog.jpg" width="230" height="230" /&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+ 
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+:root {
+  --viewer-height: 220px;
+  --viewer-height-middle: 300px;
+}
+
 section {
   padding: 10px;
   margin: 10px 0;
@@ -12,7 +17,7 @@ section {
   margin-left: 10px;
 }
 .content .code pre {
-  height: 220px;
+  height: var(--viewer-height);
   margin: 0;
   box-sizing: border-box;
   border: var(--container-border);
@@ -23,11 +28,17 @@ h2 {
 .viewer {
   box-sizing: border-box;
   width: 420px;
-  height: 220px;
+  height: var(--viewer-height);
   border: var(--container-border);
   display: flex;
   align-content: flex-start;
   align-items: flex-start;
   flex-flow: row wrap;
   padding: 10px;
+}
+.content.middle .viewer {
+  height: var(--viewer-height-middle);
+}
+.content.middle .code pre {
+  height: var(--viewer-height-middle);
 }
