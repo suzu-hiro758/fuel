@@ -1,0 +1,298 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/common.css">
+    <link href="../../lib/prism/prism.css" rel="stylesheet" /> 
+  </head>
+  <body>
+  <body>
+    <h1 class="title">SELECT 2<a href="../../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>クロス集計</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT master.age,  master.sex,
+  data.pop_tohoku, data.pop_kanto
+FROM ( SELECT age, sex
+       FROM tblage  cross join tblsex ) master
+LEFT OUTER JOIN
+    ( SELECT age, sex,
+         SUM(CASE WHEN pref in ('青森') THEN poplation ELSE null END) AS pop_tohoku,
+         SUM(CASE WHEN pref in ('東京') THEN poplation ELSE null END) AS pop_kanto
+        FROM tblpop
+      GROUP BY age, sec ) data
+   ON master.age = data.age AND master.sex = data.sex
+-- 改善版
+SELECT master.age,  master.sex,
+  SUM(CASE WHEN pref in ('青森') THEN poplation ELSE null END) AS pop_tohoku,
+  SUM(CASE WHEN pref in ('東京') THEN poplation ELSE null END) AS pop_kanto
+FROM ( SELECT age, sex FROM tblage  cross join tblsex ) master
+LEFT OUTER JOIN tblpop data
+ ON master.age = data.age AND master.sex = data.sex
+GROUP BY master.age, master.sex
+-- 先に、1対多の結合後、集約することにより、中間テーブルを排除</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>外部結合で差集合</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT a.id, a.name
+  FROM class_a a 
+LEFT OUTER JOIN class_b b ON a.id = b.id
+WHERE b.name IS null</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>完全外部結合で排他的和集合</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT COALESCE( a.id, b.id) AS id,
+       COALESCE(a.name, b.name ) AS name
+  FROM class_a a 
+FULL OUTER JOIN class_b b ON a.id = b.id
+WHERE a.name IS null OR b.name IS null</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>前年と年商が同じ年度</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT year, sale
+  FROM salses s1
+WHERE sale = ( SELECT sale
+              FROM salses s2
+              WHERE s2.year = s1.year - 1 )
+ ORDER BY year
+---------------------------
+SELECT s1.year, s1.sale
+  FROM sales s1, sales s2
+WHERE s2.year = s1.year - 1 AND s2.sale = s1.sale
+ORDER BY year</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>直近との差分</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT s2.year AS pre_year, s1.year AS now_year,
+       s2.sale AS pre_sale, s1.sale AS now_sale,
+       s1.sale - s2.sale AS diff
+  FROM sales2 s1 LEFT OUTER JOIN sales2 s2
+     ON s2.year = ( SELECT MAX(year)
+                     FROM sales2 s3
+                     WHERE s1.year &gt; s3.year)
+ ORDER BY now_year</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>累計</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT prc_date, a1.prc_amt,
+  ( SELECT SUM(prc_amt)
+     FROM accounts a2
+    WHERE a1.prc_date &gt;= a2.prc_date ) AS onhand_amt
+FROM accounts a1
+ORDER BY prc_date</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>移動累計（3行）</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT prc_date, a1.prc_amt,
+ ( SELECT SUM(prc_amt)
+    FROM accounts a2
+   WHERE a1.prc_date >= a2.prc_date
+      AND (
+          SELECT COUNT(*)
+            FROM accounts a3
+           WHERE a3.prc_date between a2.prc_date AND a1.prc_date
+       ) &lt;= 3 
+ ) AS mvg_sum
+ FROM accounts a1
+ORDER BY prc_date</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>全ての教科が50点以上の生徒</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT DISTINCT student_id
+ FROM testscores ts1
+WHERE NOT EXISTS ( SELECT * 
+                   FROM testscores ts2
+                  WHERE ts2.student_id = ts1.student_id AND ts2.csore &lt; 50)</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>算数が80点以上、国語が50点以上の生徒</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT student_id
+ FROM testscores ts1
+WHERE subject IN ('算数', '国語')
+   AND NOT EXISTS 
+          ( SELECT *
+             FROM testscores ts2
+            WHERE ts2.student_id = ts1.student_id
+             AND 1 = CASE WHEN subject = '算数' AND score &lt; 80 THEN 1
+                        WHEN sucject = '国語' AND score &lt; 50 THEN 1
+                        ELSE 0 END )
+ GROUP BY student_id
+HAVING COUNT(*) = 2</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>列が全て1</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT *
+ FROM arraytbl
+WHERE 1 = all (col1, col2, col3, col4, col5)</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>列のいずれかが1</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT *
+ FROM arraytbl
+WHERE 1 = ANY (col1, col2, col3, col4, col5)</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>列の全てがNULL</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT *
+ FROM arraytbl
+WHERE COALESCE (col1, col2, col3, col4, col5 ) IS null</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>３つ連続した空席</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT s1.seat AS start , ‘～’ , s2.seat AS end
+  FROM seats s1, seats s2
+WHERE s2.seat = s1.seat + 2
+  AND NOT EXISTS 
+       ( SELECT *
+           FROM seats s3
+         WHERE s3.seats between s1.seat AND s2.seat AND s3.status &lt;&gt; '空' )</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>株価が上昇している期間</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT min(start_date) AS start_date, end_date
+  FROM ( SELECT s1.deal_date AS start_date,
+           MAX(s2.deal_date) AS end_date
+          FROM mystock s1, mystock s2
+         WHERE s1.deal_date &lt; s2.deal_date
+           AND NOT EXISTS
+            ( SELECT *
+               FROM mystock s3, mystock s4
+              WHERE s3.deal_date between s1.deal_date AND s2.deal_date
+               AND s4.deal_date between s1.deal_date AND s2.deal_date
+               AND s3.deal_date &lt; s4.deal_date
+               AND s3.price &gt;= s4.price)
+         GROUP BY s1.deal_date ) tmp
+GROUP BY end_date</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>全てのメンバーが待機中</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT team_id
+ FROM teams
+GROUP BY team_id
+HAVING COUNT(*) = SUM( CASE WHEN status = '待機' THEN 1 ELSE 0 end )
+------------------------------------
+SELECT team_id
+  FROM teams
+GROUP BY team_id
+HAVING MAX(status) = ‘待機’ AND MIN(status) = '待機'</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>ダブリのある集合</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT center
+ FROM materials
+GROUP BY center
+HAVING COUNT(material) &lt;&gt; COUNT (DISTINCT material);
+------------------------------------
+SELECT center, material
+ FROM materials m1
+WHERE EXISTS (SELECT *
+              FROM materials m2
+              WHERE m1.center = m2.center
+               AND m1.receive_date &lt;&gt; m2.receive_date
+               AND m1.material = m2.material )</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>クラスの75%以上の生徒が80点以上のクラス</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT class
+ FROM testresults
+GROUP BY class
+HAVING COUNT(*) * 0.75 &lt;= SUM( CASE WHEN score &gt;= 80 THEN 1 ELSE 0 end )</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>50点以上の生徒が、女子より男子の数が多いクラス</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT class
+ FROM testresults
+GROUP BY class
+HAVING SUM( CASE WHEN score &gt;= 50 AND sex = 'male' THEN 1 ELSE 0 end )
+    > SUM( CASE WHEN score &gt;= 50 AND sex = 'female' THEN 1 ELSE 0 end )</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>女子の平均点が男子より高いクラス</h2>
+        <div class="content">
+          <div class="code">
+            <pre><code class="language-sql">SELECT class
+ FROM testresults
+GROUP BY class
+HAVING AVG( CASE WHEN sex = 'm' THEN score ELSE null END)
+      &lt; AVG( CASE WHEN sex = 'f' THEN score ELSE null END)</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../../lib/prism/prism.js"></script>
+  </body>
+</html>
