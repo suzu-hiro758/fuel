@@ -149,7 +149,7 @@ HAVING COUNT(*) &gt;= ( SELECT MAX(cnt)
         <h2>メジアン</h2>
         <div class="content">
           <div class="code">
-            <pre><code class="language-sql">SELECT avg(DISTINCT income)
+            <pre><code class="language-sql">SELECT AVG(DISTINCT income)
   -- 偶数の場合は、2つ抽出されるためAVG
   FROM (
      SELECT t1.income

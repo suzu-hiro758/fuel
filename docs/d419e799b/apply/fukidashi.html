@@ -1,0 +1,269 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      main pre code[class*="language-"] {
+        font-size: 13px;
+      }
+      .viewer {
+        background: #eeeeff;
+        align-content: center;
+        justify-content: center;
+      }
+      .target {
+        position: relative;
+        width: 140px;
+        height: 70px;
+        border: solid 1px #888;
+      }
+      .notification {
+        position: absolute;
+        width: 120px;
+        padding: 14px;
+        border-radius: 5px;
+        background: white;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
+      }
+      .notification:before {
+        content: "";
+        position: absolute;
+        border: 12px solid transparent;
+      }
+      .notification:after {
+        content: "";
+        position: absolute;
+        border: 12px solid transparent;
+      }
+      .top {
+        bottom: calc(100% + 20px);
+        right: -25px;
+      }
+      .top:before {
+        bottom: -24px;
+        left: 13px;
+        border-top: 12px solid rgba(0, 0, 0, .3);
+      }
+      .top:after {
+        bottom: -24px;
+        left: 10px;
+        border-top: 12px solid white;
+      }
+      .bottom {
+        top: 40px;
+        right: -25px;
+      }
+      .bottom:before {
+        top: -24px;
+        left: 13px;
+        border-bottom: 12px solid rgba(0, 0, 0, .3);
+      }
+      .bottom:after {
+        top: -24px;
+        left: 10px;
+        border-bottom: 12px solid white;
+      }
+      .right {
+        top: -10px;
+        left: 110px;
+      }
+      .right:before {
+        top: 13px;
+        left: -24px;
+        border-right: 12px solid rgba(0, 0, 0, .3);
+      }
+      .right:after {
+        top: 10px;
+        left: -24px;
+        border-right: 12px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">吹き出し <a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>基本</h2>
+        <pre><code class="language-css">.target {
+  position: relative;
+  width: 140px;
+  height: 70px;
+  background: #888;
+}
+.notification {
+  position: absolute;
+  width: 120px;
+  padding: 14px;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
+}
+.notification:before {
+  content: "";
+  position: absolute;
+  border: 12px solid transparent;
+
+}
+.notification:after {
+  content: "";
+  position: absolute;
+  border: 12px solid transparent;
+}</code></pre>
+      </section>
+      <section>
+        <h2>上に配置</h2>
+        <div class="content middle">
+          <div class="viewer">
+            <div class="target">
+              <div class="notification top">
+                吹き出しの内容<br/>
+                吹き出しの内容
+              </div>
+              吹き出しの対象
+            </div>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_up" value="html_up" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_up" value="css_up" />css
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_up">&lt;div class="target"&gt;
+  &lt;div class="notification top"&gt;
+    吹き出しの内容&lt;br/&gt;
+    吹き出しの内容
+  &lt;/div&gt;
+  吹き出しの対象
+&lt;/div&gt;</code><code class="language-css" id="css_up">.top {
+  bottom: calc(100% + 20px);
+  right: -25;
+}
+.top:before {
+  bottom: -24px;
+  left: 13px;
+  border-top: 12px solid rgba(0, 0, 0, .3);
+}
+.top:after {
+  bottom: -24px;
+  left: 10px;
+  border-top: 12px solid white;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>下に配置</h2>
+        <div class="content middle">
+          <div class="viewer">
+            <div class="target">
+              <div class="notification bottom">
+                吹き出しの内容<br/>
+                吹き出しの内容
+              </div>
+              吹き出しの対象
+            </div>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="html_1" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="css_1" />css
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_1">&lt;div class="target"&gt;
+  &lt;div class="notification bottom"&gt;
+    吹き出しの内容&lt;br/&gt;
+    吹き出しの内容
+  &lt;/div&gt;
+  吹き出しの対象
+&lt;/div&gt;</code><code class="language-css" id="css_1">.bottom {
+  top: 40px;
+  right: -25;
+}
+.bottom:before {
+  top: -24px;
+  left: 13px;
+  border-bottom: 12px solid rgba(0, 0, 0, .3);
+}
+.bottom:after {
+  top: -24px;
+  left: 10px;
+  border-bottom: 12px solid white;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>右に配置</h2>
+        <div class="content middle">
+          <div class="viewer">
+            <div class="target">
+              <div class="notification right">
+                吹き出しの内容<br/>
+                吹き出しの内容
+              </div>
+              吹き出しの対象
+            </div>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="html_r" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="css_r" />css
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r">&lt;div class="target"&gt;
+  &lt;div class="notification right"&gt;
+    吹き出しの内容&lt;br/&gt;
+    吹き出しの内容
+  &lt;/div&gt;
+  吹き出しの対象
+&lt;/div&gt;</code><code class="language-css" id="css_r">.right {
+  top: -10px;
+  left: 110px;
+}
+.right:before {
+  top: 13px;
+  left: -24px;
+  border-right: 12px solid rgba(0, 0, 0, .3);
+}
+.right:after {
+  top: 10px;
+  left: -24px;
+  border-right: 12px solid white;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>
