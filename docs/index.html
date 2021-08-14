@@ -39,10 +39,10 @@
     <script>
       'use strict'
       {
-        const SHA_OBJ = new jsSHA("SHA-256","TEXT")
         let pass
 
         function authenticate() {
+          const SHA_OBJ = new jsSHA("SHA-256","TEXT")
           SHA_OBJ.update(pass.value)
           const hash = SHA_OBJ.getHash("HEX").slice(-9)
           const base = location.href.replace('index.html', '')
