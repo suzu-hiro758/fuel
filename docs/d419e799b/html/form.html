@@ -52,6 +52,20 @@
       main pre code[class*="language-"] {
         font-size: 13px;
       }
+      #progress {
+        appearance: none;
+        height: 10px;
+      }
+      #progress::-webkit-progress-value {
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+        background-color: #393;
+        border-radius: 5px 0 0 5px
+      }
+      #progress::-webkit-progress-bar {
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+        background-color: #ded;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -212,14 +226,36 @@
           </colgroup>
           <tbody>
             <tr>
-              <td>progress</td>
+              <td rowspan="2">progress</td>
               <td>
-                <progress id="file" max="100" value="70"> 70% </progress>
+                <progress max="100" value="70"> 70% </progress>
               </td>
               <td class="code">
 <pre><code class="language-html">&lt;progress max="100" value="70"&gt;
   70%
 &lt;/progress&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                CSSの指定<br/>
+                <progress id="progress" max="100" value="70"> 70% </progress>
+              </td>
+              <td class="code">
+<pre><code class="language-css">#progress {
+  appearance: none;
+  height: 10px;
+}
+#progress::-webkit-progress-value {
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: #393;
+  border-radius: 5px 0 0 5px
+}
+#progress::-webkit-progress-bar {
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: #ded;
+  border-radius: 5px;
+}</code></pre>
               </td>
             </tr>
             <tr>
