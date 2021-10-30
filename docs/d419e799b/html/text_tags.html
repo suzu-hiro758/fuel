@@ -1,0 +1,318 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .viewer p {
+        font-size: .9em;
+        margin: 5px 0;
+        color: #444;
+      }
+      form {
+        margin: 0;
+      }
+      output {
+        font-size: .8em;
+      }
+      section > table {
+        width:100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+      section > table th {
+        text-align: left;
+      }
+      section > table td {
+        font-size: 14px
+      }
+      section > table th p {
+        font-weight: normal;
+        font-size: .75em;
+        color: #666;
+        margin: 0;
+      }
+      section > table td:not(.code) {
+        padding: 5px 10px;
+      }
+      section > table > tbody > tr {
+        border-top: var(--light-border);
+      }
+      section > table > tbody > tr:last-of-type {
+        border-bottom: var(--light-border);
+      }
+      section > table td > pre {
+        margin: 0 !important;
+        padding: 5px 10px !important;
+        font-size: .9em !important;
+      }
+      main pre code[class*="language-"] {
+        font-size: 13px;
+      }
+      blockquote {
+        margin: 10px;
+      }
+      .code {
+        background: #f5f2f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">テキストを装飾する <a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>OL</h2>
+        <table>
+          <colgroup>
+            <col width="20%" />
+            <col width="42%" />
+            <col width="38%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>reversed<br/>start<br/>type<br/></th>
+              <td>
+                <ol reversed start="3" type="I">
+                  <li>りんご</li>
+                  <li>バナナ</li>
+                  <li>ぶどう</li>
+                </ol>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;ol reversed start="3" type="I"&gt;
+  &lt;li&gt;りんご&lt;/li&gt;
+  &lt;li&gt;バナナ&lt;/li&gt;
+  &lt;li&gt;ぶどう&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>value</th>
+              <td>
+                <ol>
+                  <li value="10">りんご</li>
+                  <li>バナナ</li>
+                  <li>ぶどう</li>
+                </ol>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;ol&gt;
+  &lt;li value="10"&gt;りんご&lt;/li&gt;
+  &lt;li&gt;バナナ&lt;/li&gt;
+  &lt;li&gt;ぶどう&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>引用・定義</h2>
+        <table>
+          <colgroup>
+            <col width="20%" />
+            <col width="42%" />
+            <col width="38%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>blockquote</th>
+              <td>
+                テキスト
+                <blockquote cite="http://www.google.com">
+                  長い文章の引用<br/>
+                  属性のciteは引用元のURL
+                </blockquote>
+                テキスト
+              </td>
+              <td class="code">
+<pre><code class="language-html">テキスト
+&lt;blockquote cite="http://www.google.com"&gt;
+  長い文章の引用&lt;br/&gt;
+  属性のciteは引用元のURL
+&lt;/blockquote&gt;
+テキスト</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>cite</th>
+              <td>
+                citeは、文献や作品タイトルを示します。<br/>
+                例えば、<br/>「ゴッホの<cite>ひまわり</cite>を鑑賞した」
+              <td class="code">
+<pre><code class="language-html">citeは、文献や作品タイトルを示します。&lt;br/&gt;
+  例えば、&lt;br/&gt;
+  「ゴッホの&lt;cite&gt;ひまわり&lt;/cite&gt;を鑑賞した」</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>q</th>
+              <td>
+                短い引用文の定義<br/>
+                <q cite="http://www.google.com">井上尚弥がKO勝利</q>
+                とのこと
+              </td>
+              <td class="code">
+<pre><code class="language-html">短い引用文の定義&lt;br/&gt;
+&lt;q cite="http://www.google.com"&gt;
+  井上尚弥がKO勝利
+&lt;/q&gt;
+とのこと</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                DL
+                <p>
+                  ddは複数OK
+                </p>
+              </th>
+              <td>
+                <dl>
+                  <dt>ブラウザ</dt>
+                  <dd>Chrome</dd>
+                  <dd>Firefox</dd>
+                  <dd>Edge</dd>
+                </dl>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;dl&gt;
+  &lt;dt&gt;ブラウザ&lt;/dt&gt;
+  &lt;dd&gt;Chrome&lt;/dd&gt;
+  &lt;dd&gt;Firefox&lt;/dd&gt;
+  &lt;dd&gt;Edge&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                dfn
+                <p>
+                  囲まれたテキストは定義部。直近の親要素の中で、定義した言葉の内容を記述する
+                </p>
+              </th>
+              <td>
+                <dfn title="HyperText Markup Lnaguage">HTML</dfn>は、ティムにより考案されました
+              <td class="code">
+<pre><code class="language-html">&lt;dfn title="HyperText Markup Lnaguage"&gt;
+  HTML
+&lt;/dfn&gt;は、
+ティムにより考案されました</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                addr
+                <p>
+                  略語や頭文字
+                </p>
+              </th>
+              <td>
+                <dfn>
+                  <addr title="World Wide Web">WWW</addr>
+                </dfn>
+                とは、インターネットで提供される<br />
+                ハイパーテキストシステムです
+              <td class="code">
+<pre><code class="language-html">&lt;dfn&gt;
+  &lt;addr title="World Wide Web"&gt;WWW&lt;/addr&gt;
+&lt;/dfn&gt;
+とは、インターネットで提供される
+ハイパーテキストシステムです</code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>その他</h2>
+        <table>
+          <colgroup>
+            <col width="20%" />
+            <col width="42%" />
+            <col width="38%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>ruby</th>
+              <td>
+                <ruby>
+                  雰囲気<rt>ふんいき</rt>
+                </ruby>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;ruby&gt;
+  雰囲気&lt;rt&gt;ふんいき&lt;/rt&gt;
+&lt;/ruby&gt;</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                sub
+              </th>
+              <td>
+                水の元素記号は「H<sub>2</sub>O」です
+              </td>
+              <td class="code">
+<pre><code class="language-html">水の元素記号は「H&lt;sub&gt;2&lt;/sub&gt;O」です</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                sup
+              </th>
+              <td>
+                この面積は「20m<sup>2</sup>」です
+              </td>
+              <td class="code">
+<pre><code class="language-html">この面積は「20m&lt;sup&gt;2&lt;/sup&gt;」です</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                time
+                <p>
+                  コンピューターが理解しやすい正確な時刻を示す
+                </p>
+              </th>
+              <td>
+                会議は、
+                <time datetime="2021-03-21T12:00">
+                  2021年3月21日の12時
+                </time>
+                に開始した
+              </td>
+              <td class="code">
+<pre><code class="language-html">会議は、
+&lt;time datetime="2021-03-21T12:00"&gt;
+  2021年3月21日の12時
+&lt;/time&gt;
+に開始した</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                data
+                <p>
+                  コンピューターが理解しやすいデータを示す
+                </p>
+              </th>
+              <td>
+                <data value="A-100">商品A</data>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;data value="A-100"&gt;商品A&lt;/data&gt;</code></pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>
