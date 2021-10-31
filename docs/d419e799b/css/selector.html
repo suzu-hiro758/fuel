@@ -1,0 +1,429 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .viewer p {
+        font-size: .9em;
+        margin: 5px 0;
+        color: #444;
+      }
+      form {
+        margin: 0;
+      }
+      output {
+        font-size: .8em;
+      }
+      section > table {
+        width:100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+      section > table td {
+        font-size: 14px
+      }
+      section > table td:not(.code) {
+        padding: 5px 10px;
+      }
+      section > table > tbody > tr {
+        border-top: var(--light-border);
+      }
+      section > table > tbody > tr:last-of-type {
+        border-bottom: var(--light-border);
+      }
+      section > table td > pre {
+        margin: 0 !important;
+        padding: 5px 10px !important;
+        font-size: .9em !important;
+      }
+      main pre code[class*="language-"] {
+        font-size: 13px;
+      }
+      blockquote {
+        margin: 10px;
+      }
+      .code {
+        background: #f5f2f0;
+        border-left: inset 1px #fff;
+        vertical-align: top;
+      }
+      pre.language-html::after {
+        content: "HTML";
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 4px;
+        color: #393;
+        font-size: .9em;
+        background: rgba(0, 0, 0, .1);
+      }
+      pre.language-css::after {
+        content: "CSS";
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 4px;
+        color: #393;
+        font-size: .9em;
+        background: rgba(0, 0, 0, .1);
+      }
+
+      td h4,
+      td h5 {
+        margin: 0;
+      }
+      td p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">セレクタ <a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <style>
+          #c-1-1 h4 + p {
+            color: red
+          }
+          #c-1-2 h4 ~ p {
+            color: red
+          }
+          #c-1-3 .green {
+            color: green;
+          }
+          #c-1-3 *[class~="bold"] {
+            font-weight: bold;
+          }
+          #c-1-4 p[class^="info"] {
+            color: red
+          }
+          #c-1-5 p[class$="info"] {
+            color: red
+          }
+          #c-1-6 p[class*="info"] {
+            color: red
+          }
+          #c-1-7 p[class|="info"] {
+            color: red
+          }
+        </style>
+        <h2>基本セレクタ</h2>
+        <table>
+          <colgroup>
+            <col width="37%" />
+            <col width="37%" />
+            <col width="26%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 隣接兄弟セレクタ
+h4 + p {
+  color: red;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;h4&gt;タイトル&lt;/h4&gt;
+&lt;p&gt;テキスト&lt;/p&gt;
+&lt;p&gt;テキスト&lt;/p&gt;
+</code></pre>
+              </td>
+              <td id="c-1-1">
+                <h4>タイトル</h4>
+                <p>テキスト</p>
+                <p>テキスト</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 一般兄弟セレクタ
+h4 ~ p {
+  color: red;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;h5&gt;タイトル&lt;/h4&gt;
+&lt;p&gt;テキスト&lt;/p&gt;
+&lt;h4&gt;タイトル&lt;/h4&gt;
+&lt;p&gt;テキスト&lt;/p&gt;
+&lt;p&gt;テキスト&lt;/p&gt;
+</code></pre>
+              </td>
+              <td id="c-1-2">
+                <h5>タイトル</h5>
+                <p>テキスト</p>
+                <h4>タイトル</h4>
+                <p>テキスト</p>
+                <p>テキスト</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 属性セレクタ
+// スペース区切りの複数の属性値を指定
+.green {
+  color: green;
+}
+*[class~="bold"] {
+  font-weight: bold;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p class="green"&gt;走れメロス&lt;/p&gt;
+&lt;p class="green bold"&gt;火の鳥&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-1-3">
+                <p class="green">走れメロス</p>
+                <p class="green bold">火の鳥</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 属性セレクタ
+// 属性値が指定の文字列で始まる
+p[class^="info"] {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p class="news-info"&gt;テキスト１&lt;/p&gt;
+&lt;p class="info"&gt;テキスト２&lt;/p&gt;
+&lt;p class="infomation"&gt;テキスト３&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-1-4">
+                <p class="news-info">テキスト１</p>
+                <p class="info">テキスト２</p>
+                <p class="infomation">テキスト３</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 属性セレクタ
+// 属性値が指定の文字列で終わる
+p[class$="info"] {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p class="news-info"&gt;テキスト１&lt;/p&gt;
+&lt;p class="info"&gt;テキスト２&lt;/p&gt;
+&lt;p class="infomation"&gt;テキスト３&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-1-5">
+                <p class="news-info">テキスト１</p>
+                <p class="info">テキスト２</p>
+                <p class="infomation">テキスト３</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 属性セレクタ
+// 属性値が指定の文字列を含む
+p[class*="info"] {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p class="news-info"&gt;テキスト１&lt;/p&gt;
+&lt;p class="news-info-home"&gt;テキスト２&lt;/p&gt;
+&lt;p class="infomation"&gt;テキスト３&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-1-6">
+                <p class="news-info">テキスト１</p>
+                <p class="news-info-home">テキスト２</p>
+                <p class="infomation">テキスト３</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 属性セレクタ
+// 属性値が指定のハイフン区切りで始まる
+p[class|="info"] {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p class="news-info"&gt;テキスト１&lt;/p&gt;
+&lt;p class="info-home"&gt;テキスト２&lt;/p&gt;
+&lt;p class="info-news"&gt;テキスト３&lt;/p&gt;
+&lt;p class="infomation"&gt;テキスト４&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-1-7">
+                <p class="news-info">テキスト１</p>
+                <p class="info-home">テキスト２</p>
+                <p class="info-news">テキスト３</p>
+                <p class="infomation">テキスト４</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <style>
+          #c-2-1 p strong:only-child {
+            color: red
+          }
+          #c-2-2 p strong:only-of-type {
+            color: red
+          }
+          #c-2-3 p:target {
+            border: 1px solid red;
+          }
+          #c-2-4 p::first-line {
+            color: red;
+          }
+          #c-2-5 p::first-letter {
+            font-size: 1.5em;
+            color: red;
+          }
+        </style>
+        <h2>疑似クラス・疑似要素</h2>
+        <table>
+          <colgroup>
+            <col width="37%" />
+            <col width="37%" />
+            <col width="26%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 子要素が一つだけ
+p strong:only-child {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p&gt;
+  &lt;strong&gt;強調&lt;/strong&gt;テキスト
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;strong&gt;強調&lt;/strong&gt;
+  &lt;span&gt;テキスト&lt;/span&gt;
+&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-2-1">
+                <p>
+                  <strong>強調</strong>
+                  テキスト
+                </p>
+                <p>
+                  <strong>強調</strong>
+                  <span>テキスト</span>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 要素の種類に関係なく、
+// 指定した子要素が一つだけ
+p strong:only-of-type {
+  color: red
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p&gt;
+  &lt;strong&gt;強調&lt;/strong&gt;
+  &lt;strong&gt;強調&lt;/strong&gt;
+  &lt;span&gt;テキスト&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;strong&gt;強調&lt;/strong&gt;
+  &lt;span&gt;テキスト&lt;/span&gt;
+  &lt;span&gt;テキスト&lt;/span&gt;
+&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-2-2">
+                <p>
+                  <strong>強調</strong>
+                  <strong>強調</strong>
+                  <span>テキスト</span>
+                </p>
+                <p>
+                  <strong>強調</strong>
+                  <span>テキスト</span>
+                  <span>テキスト</span>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// ターゲット擬似クラス
+p:target {
+  border: 1px solid red;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p&gt;
+  &lt;a href="#c-2-3-target"&gt;
+    ターゲットへのリンク
+  &lt;/a&gt;
+&lt;/p&gt;
+&lt;p id="c-2-3-target"&gt;
+  ターゲット
+&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-2-3">
+                <p><a href="#c-2-3-target">ターゲットへのリンク</a></p>
+                <p id="c-2-3-target">
+                  ターゲット
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 要素の1行目
+p::first-line {
+  color: red;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p&gt;
+  一行目&lt;br/&gt;
+  二行目&lt;br/&gt;
+  三行目
+&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-2-4">
+                <p>
+                  一行目<br/>
+                  二行目<br/>
+                  三行目
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="code">
+<pre><code class="language-css">// 要素の1文字目
+p::first-letter {
+  font-size: 1.5em;
+  color: red;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;p&gt;
+  一行目&lt;br/&gt;
+  二行目&lt;br/&gt;
+  三行目
+&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-2-5">
+                <p>
+                  一行目<br/>
+                  二行目<br/>
+                  三行目
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>
