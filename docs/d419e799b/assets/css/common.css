@@ -11,6 +11,27 @@ main {
   width: var(--content-width);
 }
 
+nav {
+  margin: 0 auto;
+  width: var(--content-width);
+  display: flex;
+  justify-content: space-between;
+}
+nav h2 {
+  display: inline-block;
+  margin: 0;
+  font-size: 1.2rem;
+}
+nav ul {
+  list-style: none;
+  display: inline-flex;
+  padding: 0;
+  margin: 0;
+}
+nav ul li {
+  padding: 0 10px;
+}
+
 h1 {
   margin: 14px auto 26px;
   width: var(--content-width);
