@@ -1,0 +1,58 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_json textarea {
+        width: 600px;
+        height: 250px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">JSON整形<a href="../">TOP</a></h1>
+    <main class="tool_json">
+      <section>
+        <div>
+          空白：
+          <select id="sel">
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="t">\t</option>
+          </select>
+          <br/>
+          <textarea id="in"></textarea>
+          <br />
+          <button id="btn">整形</button>
+          <br/>
+          <textarea id="out"></textarea>
+        </div>
+      </section>
+    </main>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const sel = document.getElementById('sel')
+        const input = document.getElementById('in')
+        const out = document.getElementById('out')
+
+        const getSpace = () => {
+          switch (sel.value) {
+            case '2': return '  '
+            case '4': return '    '
+            default: return '\t'
+          }
+        }
+        document.getElementById('btn').addEventListener('click', () => {
+          const value = JSON.stringify(JSON.parse(input.value), null, getSpace())
+          out.value = value
+        })
+      })
+    </script>
+  </body>
+</html>

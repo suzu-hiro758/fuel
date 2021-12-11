@@ -1,0 +1,57 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <h1 class="title">カラーコード変換<a href="../">TOP</a></h1>
+    <main>
+      <section>
+        <h2>16進数 -> 10進数</h2>
+        <div>
+          <input id="c1_in" /> <button id="c1_btn">変換</button> <input id="c1_out" />
+        </div>
+      </section>
+      <section>
+        <h2>10進数 -> 16進数</h2>
+        <div>
+          <input id="c2_in" /> <button id="c2_btn">変換</button> <input id="c2_out" />
+        </div>
+      </section>
+    </main>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const c1Out = document.getElementById('c1_out')
+        const c2Out = document.getElementById('c2_out')
+        document.getElementById('c1_btn').addEventListener('click', () => {
+          let inputValue = document.getElementById('c1_in').value.replace('#', '')
+          if (!/^[\da-fA-F]+$/.test(inputValue)) return
+          if (![3, 6].includes(inputValue.length)) return
+          inputValue = inputValue.length === 3 ? inputValue.replace(/(.)(.)(.)/, '$1$1$2$2$3$3') : inputValue
+
+          const outputValue = inputValue.match(/.{2}/g).map(v => parseInt(v, 16)).join(', ')
+          c1Out.value = outputValue
+          c1Out.style.background = `#${inputValue}`
+        })
+
+        document.getElementById('c2_btn').addEventListener('click', () => {
+          let inputValue = document.getElementById('c2_in').value.replace(/\s/g, '')
+          if (!/^\d{1,3}(,\d{1,3})*$/.test(inputValue)) return
+          const colors = inputValue.split(',').map(v => Number(v))
+          if (colors.length !== 3 || colors.some(c => c < 0 || c > 255)) return
+          const outputValue = colors.map(v => v.toString(16)).join('')
+          c2Out.value = `#${outputValue}`
+          c2Out.style.background = c2Out.value
+        })
+      })
+    </script>
+  </body>
+</html>
