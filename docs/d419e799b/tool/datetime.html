@@ -1,0 +1,97 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_datetime .form span {
+        width: 110px;
+        display: inline-block;
+      }
+      #tbl {
+        margin-top: 20px;
+        width: 100%;
+      }
+      #tbl th,
+      #tbl td {
+        font-size: .85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">日時変換<a href="../">TOP</a></h1>
+    <main class="tool_datetime">
+      <section>
+        <div class="form">
+          <button id="now">現在日時を入力</button><br/><br/>
+          <span>日時</span><input id="datetime" /> <button id="btn1">変換</button> <input id="out1" /><br/>
+          <span>UNIXTIME</span><input id="unixtime" /> <button id="btn2">変換</button> <input id="out2" />
+        </div>
+        <table id="tbl">
+          <colgroup>
+            <col width="30%" />
+          </colgroup>
+          <thead>
+            <tr><th>Dateメソッド</th><th>値</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>toString</td><td></td></tr>
+            <tr><td>toLocaleDateString</td><td></td></tr>
+            <tr><td>toISOString</td><td></td></tr>
+            <tr><td>toUTCString</td><td></td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const in1 = document.getElementById('datetime')
+        const in2 = document.getElementById('unixtime')
+        const out1 = document.getElementById('out1')
+        const out2 = document.getElementById('out2')
+        const rows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+
+        document.getElementById('now').addEventListener('click', () => {
+          const dt = new Date()
+          in1.value = dt.toLocaleString()
+          in2.value = dt.getTime()
+        })
+
+        function writeTable(dt) {
+          rows.forEach(row => {
+            const mtd = row.childNodes.item(0).textContent
+            row.childNodes.item(1).textContent = dt[mtd]()
+          })
+        }
+
+        document.getElementById('btn1').addEventListener('click', () => {
+          if (!in1.value) return
+          try {
+            const dt = new Date(in1.value)
+            out1.value = dt.getTime()
+
+            writeTable(dt)
+          } catch (e) {
+            console.warn(e)
+          }
+        })
+        document.getElementById('btn2').addEventListener('click', () => {
+           if (!in2.value || !/^\d+$/.test(in2.value)) return
+          try {
+            const converted = in2.value.padEnd(13, 0)
+            const dt = new Date(Number(converted))
+            out2.value = dt.toLocaleString()
+
+            writeTable(dt)
+          } catch (e) {
+            console.warn(e)
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
