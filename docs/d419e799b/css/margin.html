@@ -1,0 +1,236 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_css.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .css_margin .viewer {
+        display: block;
+        padding: 10px;
+      }
+      .item {
+        width: 150px;
+        background: #999;
+      }
+      .sec1 .item1 {
+        margin: 20px 0;
+        height: 30px;
+      }
+      .sec1 .item2 {
+        margin: 30px 0;
+        height: 30px;
+      }
+      .sec2 .item1 {
+        margin: 30px 0;
+        width: 200px;
+        background: red;
+      }
+      .sec2 .item2 {
+        margin: 20px 0;
+        height: 30px;
+      }
+      .sec3 .item1 {
+        margin: 30px 0;
+        width: 200px;
+        background: red;
+      }
+      .sec3 .item2 {
+        margin: 20px 0;
+        height: 30px;
+      }
+      .sec4 .item1 {
+        margin: 30px 0;
+        padding: 10px;
+        width: 200px;
+        background: red;
+      }
+      .sec4 .item2 {
+        margin: 20px 0;
+        height: 30px;
+      }
+      .sec5 .item1 {
+        margin: 30px 0;
+        border: 1px solid green;
+        width: 200px;
+        background: red;
+      }
+      .sec5 .item2 {
+        margin: 20px 0;
+        height: 30px;
+      }
+      .sec6 .item1 {
+        display: flex;
+        margin: 30px 0;
+        width: 200px;
+        background: red;
+      }
+      .sec6 .item2 {
+        margin: 20px 0;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">marginの相殺 <a href="../">TOP</a></h1>
+    <main class="css_margin">
+      <section>
+        <h2>基本設定</h2>
+        <div class="code">
+          <pre><code class="language-css">.viewer {
+  display: block;
+  padding: 10px;
+}
+.item {
+  width: 150px;
+  background: #999;
+}</code></pre>
+      </div>
+      </section>
+      <section class="sec1">
+        <h2>隣接する要素のマージンの相殺</h2>
+        <p>20px と 30px が設定されているが、マージンは合計で50px ではなく、相殺されて30pxになる</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">.item1</div>
+            <div class="item item2">.item2</div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  margin: 20px 0;
+  height: 30px;
+}
+.item2 {
+  margin: 30px 0;
+  height: 30px;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec2">
+        <h2>入れ子の要素のマージンの相殺</h2>
+        <p>子要素に兄弟がない場合は、親子の要素は重なり、マージンは相殺される</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">
+              <div class="item item2">.item2</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  margin: 30px 0;
+  width: 200px;
+  background: red;
+}
+.item2 {
+  margin: 20px 0;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec3">
+        <h2>入れ子の要素のマージンが相殺されないケース 1</h2>
+        <p>子要素の兄弟</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">.item1
+              <div class="item item2">.item2</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  margin: 30px 0;
+  width: 200px;
+  background: red;
+}
+.item2 {
+  margin: 20px 0;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec4">
+        <h2>入れ子の要素のマージンが相殺されないケース 2</h2>
+        <p>親要素にpadding</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">
+              <div class="item item2">.item2</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  margin: 30px 0;
+  padding: 10px;
+  width: 200px;
+  background: red;
+}
+.item2 {
+  margin: 20px 0;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec5">
+        <h2>入れ子の要素のマージンが相殺されないケース 3</h2>
+        <p>親要素にborder <br />子要素のborderは問題なし</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">
+              <div class="item item2">.item2</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  margin: 30px 0;
+  border: 1px solid green;
+  width: 200px;
+  background: red;
+}
+.item2 {
+  margin: 20px 0;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec6">
+        <h2>入れ子の要素のマージンが相殺されないケース 4</h2>
+        <p>親要素が flex <br />子要素が flex は問題なし</p>
+        <div class="content">
+          <div class="viewer">
+            <div class="item item1">
+              <div class="item item2">.item2</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.item1 {
+  display: flex;
+  margin: 30px 0;
+  width: 200px;
+  background: red;
+}
+.item2 {
+  margin: 20px 0;
+  height: 30px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+  </body>
+</html>
