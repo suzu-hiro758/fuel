@@ -11,33 +11,102 @@
       main pre code[class*="language-"] {
         font-size: 13px;
       }
-      .container {
+      .content .viewer {
+        height: 400px;
+        width: 300px
+      }
+      .content .code {
+        width: 550px;
+      }
+      .content .code pre {
+        font-weight: bold;
+        height: 400px;
+      }
+      #cont1 .container {
         font-family: Helvetica;
         font-size: 16px;
         color: green;
         padding: 2em;
       }
-
-      .container .some-class {
+      #cont1 .container .some-class {
         color: red;
       }
     </style>
-    <script src="./module/question-one.js" type="module"></script>
   </head>
   <body>
     <h1 class="title">Web Component <a href="../">TOP</a></h1>
     <main>
       <section>
         <h2>question-one</h2>
-        <div class="content middle">
-          <div class="viewer">
-            <question-one></question-one>
+        <div class="content">
+          <div class="viewer" id="cont1">
+            <script src="./module/question-one.js" type="module"></script>
+            <div class="container">
+              <question-one></question-one>
+            </div>
           </div>
-          <div class="code"></div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="html_r" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_1" value="js_r" />js
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r">&lt;style&gt;
+  .container {
+    font-family: Helvetica;
+    font-size: 16px;
+    color: green;
+    padding: 2em;
+  }
+  .container .some-class {
+    color: red;
+  }
+&lt;/style&gt;
+
+&lt;div class="container"&gt;
+  &lt;question-one&gt;&lt;/question-one&gt;
+&lt;/div&gt;
+</code><code class="language-js" id="js_r">const template = document.createElement("template")
+template.innerHTML = `
+&lt;style&gt;
+  .some-class {
+    font-family: Arial;
+    font-size: 14px;
+    color: blue;
+  }
+&lt;/style&gt;
+&lt;div&gt;
+  This is some text
+&lt;/div&gt;
+&lt;div class="some-class"&gt;
+  And here's some more text
+&lt;/div&gt;
+`
+
+class QuestionOne extends HTMLElement {
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" })
+      this.shadowRoot.appendChild(template.content.cloneNode(true))
+    }
+  }
+}
+
+customElements.define("question-one", QuestionOne)</code></pre>
+          </div>
         </div>
       </section>
  
     </main>
     <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
   </body>
 </html>
