@@ -3,6 +3,7 @@
 :root {
   --viewer-height: 220px;
   --viewer-height-middle: 300px;
+  --viewer-width: 420px
 }
 
 section {
@@ -11,10 +12,10 @@ section {
 }
 .content {
   display: flex;
+  gap: 10px
 }
 .content .code {
-  width: 450px;
-  margin-left: 10px;
+  width: calc(100% - var(--viewer-width));
 }
 .content .code pre {
   height: var(--viewer-height);
@@ -27,7 +28,7 @@ h2 {
 }
 .viewer {
   box-sizing: border-box;
-  width: 420px;
+  width: var(--viewer-width);
   height: var(--viewer-height);
   border: var(--container-border);
   display: flex;

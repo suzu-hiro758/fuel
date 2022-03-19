@@ -8,39 +8,40 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
     <link href="../lib/prism/prism.css" rel="stylesheet" /> 
     <style>
+      #web-component .viewer {
+        display: block;
+      }
       main pre code[class*="language-"] {
         font-size: 13px;
       }
-      .content .viewer {
-        height: 400px;
-        width: 300px
-      }
-      .content .code {
-        width: 550px;
-      }
       .content .code pre {
         font-weight: bold;
-        height: 400px;
-      }
-      #cont1 .container {
-        font-family: Helvetica;
-        font-size: 16px;
-        color: green;
-        padding: 2em;
-      }
-      #cont1 .container .some-class {
-        color: red;
       }
     </style>
+    <script>
+      document.documentElement.style.setProperty('--viewer-height', '400px')
+      document.documentElement.style.setProperty('--viewer-width', '300px')
+    </script>
   </head>
   <body>
     <h1 class="title">Web Component <a href="../">TOP</a></h1>
-    <main>
+    <main id="web-component">
       <section>
-        <h2>question-one</h2>
+        <h2>1. どのCSSが受け継がれるか</h2>
         <div class="content">
           <div class="viewer" id="cont1">
             <script src="./module/question-one.js" type="module"></script>
+            <style>
+              #cont1 .container {
+                font-family: Helvetica;
+                font-size: 16px;
+                color: green;
+                padding: 2em;
+              }
+              #cont1 .container .some-class {
+                color: red;
+              }
+            </style>
             <div class="container">
               <question-one></question-one>
             </div>
@@ -104,7 +105,323 @@ customElements.define("question-one", QuestionOne)</code></pre>
           </div>
         </div>
       </section>
- 
+      <section>
+        <h2>2. :host はカスタマイズできるか</h2>
+        <div class="content">
+          <div class="viewer" id="cont2">
+            <script src="./module/question-two.js" type="module"></script>
+            <style>
+              #cont2 .some-class {
+                display: flex;
+                flex-flow: row-reverse;
+                width: 100%;
+                border: 1px solid red;
+              }
+            </style>
+            <question-two></question-two>
+            <question-two class="some-class"></question-two>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_2" value="html_r2" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_2" value="js_r2" />js
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r2">&lt;style&gt;
+  #cont2 .some-class {
+    display: flex;
+    flex-flow: row-reverse;
+    width: 100%;
+    border: 1px solid red;
+  }
+&lt;/style&gt;
+&lt;question-two&gt;&lt;/question-two&gt;
+&lt;question-two class="some-class"&gt;&lt;/question-two&gt;
+</code><code class="language-js" id="js_r2">const template = document.createElement("template");
+template.innerHTML = `
+&lt;style&gt;
+  :host {
+    display: block;
+    width: 30px;
+    border: 1px dotted black;
+  }
+&lt;/style&gt;
+
+&lt;div&gt;1&lt;/div&gt;
+&lt;div&gt;2&lt;/div&gt;
+&lt;div&gt;3&lt;/div&gt;
+`;
+
+class QuestionTwo extends HTMLElement {
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+  }
+}
+
+customElements.define("question-two", QuestionTwo);
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>3. CSS変数は適用されるか</h2>
+        <div class="content">
+          <div class="viewer" id="cont3">
+            <script src="./module/question-three.js" type="module"></script>
+            <style>
+              #cont3 .custom-color {
+                --my-color: red;
+              }
+            </style>
+
+            <question-three></question-three>
+            <question-three class="custom-color"></question-three>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_3" value="html_r3" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_3" value="js_r3" />js
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r3">&lt;style&gt;
+  .custom-color {
+    --my-color: red;
+  }
+&lt;/style&gt;
+
+&lt;question-three&gt;&lt;/question-three&gt;
+&lt;question-three class="custom-color"&gt;&lt;/question-three&gt;
+</code><code class="language-js" id="js_r3">const template = document.createElement("template");
+template.innerHTML = `
+&lt;style&gt;
+  div {
+    color: var(--my-color, blue);
+  }
+&lt;/style&gt;
+
+&lt;div&gt;
+  Some text
+&lt;/div&gt;
+`;
+
+class QuestionThree extends HTMLElement {
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+  }
+}
+
+customElements.define("question-three", QuestionThree);
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>4. コンポーネントの子供はどうなるか</h2>
+        <div class="content">
+          <div class="viewer" id="cont4">
+            <script src="./module/question-four.js" type="module"></script>
+            <style>
+              #cont4 .some-class .header {
+                color: red;
+              }
+
+              #cont4 .some-class div {
+                color: mediumvioletred;
+              }
+            </style>
+
+            <question-four>
+              <div>1</div>
+              <div class="special">2</div>
+              <div>3</div>
+            </question-four>
+
+            <question-four class="some-class">
+              <div>4</div>
+              <div class="special">5</div>
+              <div>6</div>
+              <span class="header" slot="header">
+                Second Element Header
+              </span>
+            </question-four>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_4" value="html_r4" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_4" value="js_r4" />js
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r4">&lt;style&gt;
+  .some-class .header {
+    color: red;
+  }
+
+  .some-class div {
+    color: mediumvioletred;
+  }
+&lt;/style&gt;
+
+&lt;question-four&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div class="special"&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/question-four&gt;
+
+&lt;question-four class="some-class"&gt;
+  &lt;div&gt;4&lt;/div&gt;
+  &lt;div class="special"&gt;5&lt;/div&gt;
+  &lt;div&gt;6&lt;/div&gt;
+  &lt;span class="header" slot="header"&gt;
+    Second Element Header
+  &lt;/span&gt;
+&lt;/question-four&gt;
+</code><code class="language-js" id="js_r4">const template = document.createElement("template");
+template.innerHTML = `
+&lt;style&gt;
+  header ::slotted(*) {
+    text-decoration: underline;
+  }
+  article ::slotted(div.special) {
+    color: turquoise;
+  }
+&lt;/style&gt;
+
+&lt;section&gt;
+  &lt;header&gt;
+    &lt;h3&gt;&lt;slot name="header"&gt;Default Header&lt;/slot&gt;&lt;/h3&gt;
+  &lt;/header&gt;
+  &lt;article&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/article&gt;
+&lt;/section&gt;
+`;
+
+class QuestionFour extends HTMLElement {
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+  }
+}
+
+customElements.define("question-four", QuestionFour);
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>5. 部分的なカスタマイズ</h2>
+        <div class="content">
+          <div class="viewer" id="cont5">
+            <script src="./module/question-five.js" type="module"></script>
+            <style>
+              question-five.custom-part::part(avatar) {
+                border-radius: 50%;
+              }
+
+              question-five.custom-part::part(name) {
+                font-family: Verdana;
+                color: mediumpurple;
+              }
+            </style>
+
+            <question-five></question-five>
+            <question-five class="custom-part"></question-five>
+          </div>
+          <div class="code multi">
+            <ul class="menu">
+              <li>
+                <label>
+                  <input type="radio" name="menu_5" value="html_r5" />html
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="menu_5" value="js_r5" />js
+                </label>
+              </li>
+            </ul>
+            <pre>
+<code class="language-html" id="html_r5">&lt;style&gt;
+  question-five.custom-part::part(avatar) {
+    border-radius: 50%;
+  }
+
+  question-five.custom-part::part(name) {
+    font-family: Verdana;
+    color: mediumpurple;
+  }
+&lt;/style&gt;
+
+&lt;question-five&gt;&lt;/question-five&gt;
+&lt;question-five class="custom-part"&gt;&lt;/question-five&gt;
+</code><code class="language-js" id="js_r5">const template = document.createElement("template");
+template.innerHTML = `
+&lt;style&gt;
+  :host {
+    display: flex;
+  }
+  img {
+    width: 64px;
+    height: 64px;
+  }
+  div {
+    font-family: Arial;
+    color: seagreen;
+  }
+&lt;/style&gt;
+
+&lt;img part="avatar" src="https://via.placeholder.com/64x64.jpg?text=Avatar" /&gt;
+&lt;div part="name"&gt;
+  Some Name
+&lt;/div&gt;
+`;
+
+class QuestionFive extends HTMLElement {
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+  }
+}
+
+customElements.define("question-five", QuestionFive);
+</code></pre>
+          </div>
+        </div>
+      </section>
     </main>
     <script src="../lib/prism/prism.js"></script>
     <script src="../assets/js/multicode.js"></script>

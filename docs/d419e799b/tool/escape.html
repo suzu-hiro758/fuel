@@ -1,0 +1,42 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_escape textarea {
+        width: 600px;
+        height: 250px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">HTMLエスケープ<a href="../">TOP</a></h1>
+    <main class="tool_escape">
+      <section>
+        <div>
+          <textarea id="in"></textarea>
+          <br />
+          <button id="btn">実行</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const input = document.getElementById('in')
+
+        document.getElementById('btn').addEventListener('click', () => {
+          input.value = input.value
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+        })
+      })
+    </script>
+  </body>
+</html>

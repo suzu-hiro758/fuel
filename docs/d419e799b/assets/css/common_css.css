@@ -1,16 +1,22 @@
 @charset "UTF-8";
 
+:root {
+  --viewer-height: 220px;
+  --viewer-width: 500px
+}
+
 section {
   padding: 10px;
   margin: 10px;
 }
 .content {
   display: flex;
+  gap: 10px;
 }
 .content .code {
-  width: 350px;
+  width: calc(100% - var(--viewer-width));
   margin-left: 10px;
-  height: 220px;
+  height: var(--viewer-height);
   overflow: auto;
   border: var(--container-border);
   box-sizing: border-box;
@@ -25,8 +31,8 @@ h2 {
 }
 .viewer {
   box-sizing: border-box;
-  width: 500px;
-  height: 220px;
+  width: var(--viewer-width);
+  height: var(--viewer-height);
   border: var(--container-border);
   display: flex;
 }
