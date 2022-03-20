@@ -23,9 +23,9 @@ const options = {
 }
 const observer = new MutationObserver((mutationRecords) => {
   // コールバック処理
-}, options);
+});
 // ターゲットを指定して監視
-observer.observe(document.getElementById('target'));</code></pre>
+observer.observe(document.getElementById('target'), options);</code></pre>
         <h3>config</h3>
         <ul>
           <li>childList: boolean – 子ノード（テキストのノードも含む）</li>

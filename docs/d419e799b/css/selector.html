@@ -51,6 +51,10 @@
         background: #f5f2f0;
         border-left: inset 1px #fff;
         vertical-align: top;
+        width: 300px;
+      }
+      .code pre {
+        width: 310px;
       }
       pre.language-html::after {
         content: "HTML";
@@ -114,11 +118,6 @@
         </style>
         <h2>基本セレクタ</h2>
         <table>
-          <colgroup>
-            <col width="37%" />
-            <col width="37%" />
-            <col width="26%" />
-          </colgroup>
           <tbody>
             <tr>
               <td class="code">
@@ -277,11 +276,6 @@ p[class|="info"] {
         </style>
         <h2>疑似クラス</h2>
         <table>
-          <colgroup>
-            <col width="37%" />
-            <col width="37%" />
-            <col width="26%" />
-          </colgroup>
           <tbody>
             <tr>
               <td class="code">
@@ -444,11 +438,18 @@ div:focus-within {
                 #c-2-6 input:in-range {
                   background-color: rgba(0, 255, 0, 0.25);
                 }
+                #c-2-6 input:out-of-range {
+                  background-color: rgba(255, 0, 0, 0.25);
+                }
               </style>
               <td class="code">
 <pre><code class="language-css">// 値が制限範囲内にある input要素
 input:in-range {
   background-color: rgba(0, 255, 0, 0.25);
+}
+// 値が制限範囲外にある input要素
+input:out-of-range {
+  background-color: rgba(255, 0, 0, 0.25);
 }
 </code></pre>
               </td>
@@ -508,6 +509,69 @@ input:indeterminate {
                 </fieldset>
               </td>
             </tr>
+
+            <tr>
+              <style>
+                #c-2-8 input:valid {
+                  background-color: #ddffdd;
+                }
+                #c-2-8 input:invalid {
+                  background-color: #ffdddd;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// 検証に失敗したもの
+input:valid {
+  background-color: #ddffdd;
+}
+input:invalid {
+  background-color: #ffdddd;
+}
+</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">email &lt;input type="email"&gt;</code></pre>
+              </td>
+              <td id="c-2-8">
+                email <input type="email">
+              </td>
+            </tr>
+            <tr>
+              <style>
+                #c-2-9 input:optional {
+                  border-color: rebeccapurple;
+                  border-width: 3px;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// required 属性が設定されていない
+input:optional {
+  border-color: rebeccapurple;
+  border-width: 3px;
+}
+</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;div&gt;
+  Enter a URL:&lt;br /&gt;
+  &lt;input type="url"&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  Enter an email: &lt;br /&gt;
+  &lt;input type="email" required&gt;
+&lt;/div&gt;</code></pre>
+              </td>
+              <td id="c-2-9">
+                <div>
+                  Enter a URL:<br />
+                  <input type="url">
+                </div>
+                <div>
+                  Enter an email: <br />
+                  <input type="email" required>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -524,11 +588,6 @@ input:indeterminate {
         </style>
         <h2>疑似要素</h2>
         <table>
-          <colgroup>
-            <col width="37%" />
-            <col width="37%" />
-            <col width="26%" />
-          </colgroup>
           <tbody>
             <tr>
               <td class="code">
@@ -575,6 +634,59 @@ p::first-letter {
                 </p>
               </td>
             </tr>
+
+            <tr>
+              <style>
+                #c-3-3 input::placeholder {
+  color: blue;
+  font-size: 1.5em;
+}
+              </style>
+              <td class="code">
+<pre><code class="language-css">// プレースホルダー
+input::placeholder {
+  color: blue;
+  font-size: 1.5em;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input placeholder="こちらに入力..."&gt;</code></pre>
+              </td>
+              <td id="c-3-3">
+                <input placeholder="こちらに入力...">
+              </td>
+            </tr>
+
+            <tr>
+              <style>
+                #c-3-4::selection {
+                  color: gold;
+                  background-color: red;
+                }
+                #c-3-4 p::selection {
+                  color: white;
+                  background-color: blue;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">::selection {
+  color: gold;
+  background-color: red;
+}
+p::selection {
+  color: white;
+  background-color: blue;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">選択すると特殊なスタイル
+&lt;p&gt;こちらの段落も文字列を選択&lt;/p&gt;</code></pre>
+              </td>
+              <td id="c-3-4">
+                選択すると特殊なスタイル
+                <p>こちらの段落も文字列を選択。</p>
+              </td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -585,7 +697,7 @@ p::first-letter {
 /*
             <tr>
               <style>
-                #c-2-3 {
+                #c-3-3 {
                 }
               </style>
               <td class="code">
@@ -594,7 +706,7 @@ p::first-letter {
               <td class="code">
 <pre><code class="language-html"></code></pre>
               </td>
-              <td id="c-2-4">
+              <td id="c-3-4">
               </td>
             </tr>
 */
