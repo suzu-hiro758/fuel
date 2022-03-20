@@ -74,6 +74,7 @@ main pre code[class*="language-"] {
   list-style: none;
   justify-content: flex-end;
   align-items: flex-end;
+  z-index: 1;
 }
 .code .menu label {
   padding: 3px 10px 0;

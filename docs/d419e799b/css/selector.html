@@ -274,15 +274,8 @@ p[class|="info"] {
           #c-2-3 p:target {
             border: 1px solid red;
           }
-          #c-2-4 p::first-line {
-            color: red;
-          }
-          #c-2-5 p::first-letter {
-            font-size: 1.5em;
-            color: red;
-          }
         </style>
-        <h2>疑似クラス・疑似要素</h2>
+        <h2>疑似クラス</h2>
         <table>
           <colgroup>
             <col width="37%" />
@@ -375,6 +368,169 @@ p:target {
               </td>
             </tr>
             <tr>
+              <style>
+                #c-2-4 input:default {
+                  box-shadow: 0 0 2px 1px coral;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// 関連する要素グループ内で、
+// 規定となっているフォームの要素
+input:default {
+  box-shadow: 0 0 2px 1px coral;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;fieldset&gt;
+  &lt;legend&gt;Favorite season&lt;/legend&gt;
+
+  &lt;input type="radio"
+    name="season" id="spring"&gt;
+  &lt;label for="spring"&gt;Spring&lt;/label&gt;
+  &lt;br /&gt;
+  &lt;input type="radio"
+    name="season" id="summer" checked&gt;
+  &lt;label for="summer"&gt;Summer&lt;/label&gt;
+&lt;/fieldset&gt;
+</code></pre>
+              </td>
+              <td id="c-2-4">
+                <fieldset>
+                  <legend>Favorite season</legend>
+
+                  <input type="radio" name="season" id="spring">
+                  <label for="spring">Spring</label>
+                  <br/>
+                  <input type="radio" name="season" id="summer" checked>
+                  <label for="summer">Summer</label>
+                </fieldset>
+              </td>
+            </tr>
+            <tr>
+              <style>
+                #c-2-5 div:focus-within {
+                  background: cyan;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// その要素または子孫要素に
+// フォーカスがある場合に一致
+div:focus-within {
+  background: cyan;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;div&gt;
+  &lt;label for="given_name"&gt;名:&lt;/label&gt;
+  &lt;input id="given_name" type="text"&gt;
+  &lt;br&gt;
+  &lt;label for="family_name"&gt;姓:&lt;/label&gt;
+  &lt;input id="family_name" type="text"&gt;
+&lt;/div&gt;</code></pre>
+              </td>
+              <td id="c-2-5">
+                <div>
+                  <label for="given_name">名:</label>
+                  <input id="given_name" type="text">
+                  <br>
+                  <label for="family_name">姓:</label>
+                  <input id="family_name" type="text">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <style>
+                #c-2-6 input:in-range {
+                  background-color: rgba(0, 255, 0, 0.25);
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// 値が制限範囲内にある input要素
+input:in-range {
+  background-color: rgba(0, 255, 0, 0.25);
+}
+</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">1 から 10 の間の値が有効です。
+&lt;br /&gt;
+&lt;input type="number" placeholder="1 to 10"
+  min="1" max="10" value="12" &gt;
+</code></pre>
+              </td>
+              <td id="c-2-6">
+                1 から 10 の間の値が有効です。
+                <br />
+                <input type="number" placeholder="1 to 10" min="1" max="10" value="12" >
+              </td>
+            </tr>
+
+            <tr>
+              <style>
+                #c-2-7 input:indeterminate + label {
+                  background: lime;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// 未確定のフォーム要素
+input:indeterminate {
+  background: lime;
+}
+</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;fieldset&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="radio1"
+      name="radioButton"&gt;
+    &lt;label for="radio1"&gt;
+      First radio label&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="radio2"
+      name="radioButton"&gt;
+    &lt;label for="radio2"&gt;
+      Second radio label&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;;</code></pre>
+              </td>
+              <td id="c-2-7">
+                <fieldset>
+                  <div>
+                    <input type="radio" id="radio1" name="radioButton">
+                    <label for="radio1">First radio label.</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="radio2" name="radioButton">
+                    <label for="radio2">Second radio label</label>
+                  </div>
+                </fieldset>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <style>
+          #c-3-1 p::first-line {
+            color: red;
+          }
+          #c-3-2 p::first-letter {
+            font-size: 1.5em;
+            color: red;
+          }
+        </style>
+        <h2>疑似要素</h2>
+        <table>
+          <colgroup>
+            <col width="37%" />
+            <col width="37%" />
+            <col width="26%" />
+          </colgroup>
+          <tbody>
+            <tr>
               <td class="code">
 <pre><code class="language-css">// 要素の1行目
 p::first-line {
@@ -388,7 +544,7 @@ p::first-line {
   三行目
 &lt;/p&gt;</code></pre>
               </td>
-              <td id="c-2-4">
+              <td id="c-3-1">
                 <p>
                   一行目<br/>
                   二行目<br/>
@@ -411,7 +567,7 @@ p::first-letter {
   三行目
 &lt;/p&gt;</code></pre>
               </td>
-              <td id="c-2-5">
+              <td id="c-3-2">
                 <p>
                   一行目<br/>
                   二行目<br/>
@@ -425,5 +581,23 @@ p::first-letter {
     </main>
     <script src="../lib/prism/prism.js"></script>
     <script src="../assets/js/multicode.js"></script>
+    <script>
+/*
+            <tr>
+              <style>
+                #c-2-3 {
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css"></code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html"></code></pre>
+              </td>
+              <td id="c-2-4">
+              </td>
+            </tr>
+*/
+    </script>
   </body>
 </html>
