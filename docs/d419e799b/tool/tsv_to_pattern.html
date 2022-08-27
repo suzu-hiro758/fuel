@@ -1,0 +1,60 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_tsvpattern textarea {
+        width: 800px;
+        height: 350px;
+        margin: 10px 0;
+      }
+      #pattern {
+        width: 800px;
+        height: 80px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">TSVの値で、パターンのプレースホルダーを埋める<a href="../">TOP</a></h1>
+    <main class="tool_tsvpattern">
+      <section>
+        <textarea id="in"></textarea>
+        <div>
+          <h2>パターン指定</h2>
+          プレースホルダー<input id="ph" value="@@" /><br/>
+          <textarea id="pattern"></textarea><br/>
+          <button id="btn1">実行</button>
+        </div>
+        <textarea id="out"></textarea>
+      </section>
+    </main>
+    <script>
+
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const input = document.getElementById('in')
+        const output = document.getElementById('out')
+
+        document.getElementById('btn1').addEventListener('click', () => {
+          const ph = document.getElementById('ph').value
+          const pattern = document.getElementById('pattern').value
+          const inputs = input.value.split(/\n/);
+          inputs.forEach(value => {
+            if (value.length) return
+            const values = value.split(/\t/);
+            let outvalue = pattern;
+            values.forEach(v => {
+              outvalue = outvalue.replace(ph, v);
+            })
+            output.value += outvalue + '\n';
+          })
+        })
+      })
+    </script>
+  </body>
+</html>
