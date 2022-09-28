@@ -32,6 +32,20 @@
           <button id="btn1">実行</button>
         </div>
         <textarea id="out"></textarea>
+        <div>
+          <pre>
+            例）
+            name -> 鈴木
+            age -> 21
+
+            パターン
+            map['@@'] = '@@';
+
+            結果
+            map['name'] = '鈴木';
+            map['age'] = '21';
+          </pre>
+        </div>
       </section>
     </main>
     <script>
@@ -45,7 +59,7 @@
           const pattern = document.getElementById('pattern').value
           const inputs = input.value.split(/\n/);
           inputs.forEach(value => {
-            if (value.length) return
+            if (!value.length) return
             const values = value.split(/\t/);
             let outvalue = pattern;
             values.forEach(v => {
