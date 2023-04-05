@@ -23,7 +23,13 @@
       <section>
         <h2>10進数 -> 16進数</h2>
         <div>
-          <input id="c2_in" /> <button id="c2_btn">変換</button> <input id="c2_out" />
+          <input id="c2_in" placeholder="255,218,27"/> <button id="c2_btn">変換</button> <input id="c2_out" />
+        </div>
+      </section>
+      <section>
+        <h2>10進数 + opacity -> 10進数</h2>
+        <div>
+          <input id="c3_in" placeholder="218,0.2" /> <button id="c3_btn">変換</button> <input id="c3_out" />
         </div>
       </section>
     </main>
@@ -31,6 +37,7 @@
       window.addEventListener('DOMContentLoaded', (event) => {
         const c1Out = document.getElementById('c1_out')
         const c2Out = document.getElementById('c2_out')
+        const c3Out = document.getElementById('c3_out')
         document.getElementById('c1_btn').addEventListener('click', () => {
           let inputValue = document.getElementById('c1_in').value.replace('#', '')
           if (!/^[\da-fA-F]+$/.test(inputValue)) return
@@ -50,6 +57,18 @@
           const outputValue = colors.map(v => v.toString(16)).join('')
           c2Out.value = `#${outputValue}`
           c2Out.style.background = c2Out.value
+        })
+
+        document.getElementById('c3_btn').addEventListener('click', () => {
+          let inputValue = document.getElementById('c3_in').value.replace(/\s/g, '')
+          if (!/^\d{1,3}(,0.\d{1,3})*$/.test(inputValue)) return
+          const colors = inputValue.split(',').map(v => Number(v))
+          if (colors.length !== 2) return
+          if (colors[0] < 0 || colors[0] > 255) return
+          if (colors[1] < 0 || colors[1] >= 1) return
+
+          const outputValue = Math.round(colors[0] + (255 - colors[0]) * (1 - colors[1]))
+          c3Out.value = outputValue
         })
       })
     </script>
