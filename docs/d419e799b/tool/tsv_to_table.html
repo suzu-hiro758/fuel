@@ -1,0 +1,53 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_tsvpattern textarea {
+        width: 800px;
+        height: 350px;
+        margin: 10px 0;
+      }
+      #pattern {
+        width: 800px;
+        height: 80px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">TSVをHTMLのTABLEに変換<a href="../">TOP</a></h1>
+    <main class="tool_tsvpattern">
+      <section>
+        <textarea id="in"></textarea>
+        <div>
+          <button id="btn1">実行</button>
+        </div>
+        <textarea id="out"></textarea>
+      </section>
+    </main>
+    <script>
+
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const input = document.getElementById('in')
+        const output = document.getElementById('out')
+
+        document.getElementById('btn1').addEventListener('click', () => {
+          const lines = input.value.split(/\n/).filter(v => v.trim().length);
+          if (lines.length === 0) return;
+          output.value = '<table>\n';
+          lines.forEach((value, i) => {
+            const values = value.split(/\t/).map(v => i === 0 ? `<th>${v}</th>` : `<td>${v}</td>`).join('');
+            output.value += `<tr>${values}</tr>\n`;
+          });
+          output.value += '</table>';
+        })
+      })
+    </script>
+  </body>
+</html>
