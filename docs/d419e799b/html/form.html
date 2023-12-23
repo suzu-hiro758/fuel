@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
     <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <script src="../assets/js/main.js"></script>
     <style>
       .viewer p {
         font-size: .9em;
@@ -297,17 +298,19 @@
             <p>disabledにすると、全体がdisabledになってPOSTされなくなる</p>
           </div>
           <div class="code">
-            <pre>
-<code class="language-html">&lt;fieldset&gt;
-  &lt;legend&gt;通常&lt;/legend&gt;
-  &lt;input /&gt;
-  &lt;label&gt;&lt;input type="checkbox" /&gt;check&lt;/label&gt;
-&lt;/fieldset&gt;
-&lt;fieldset disabled&gt;
-  &lt;legend&gt;disabled&lt;/legend&gt;
-  &lt;input /&gt;
-  &lt;label&gt;&lt;input type="checkbox" /&gt;check&lt;/label&gt;
-&lt;/fieldset&gt;</code></pre>
+<script>
+source.code_fieldset = `<fieldset>
+  <legend>通常</legend>
+  <input />
+  <label><input type="checkbox" />check</label>
+</fieldset>
+<fieldset disabled>
+  <legend>disabled</legend>
+  <input />
+  <label><input type="checkbox" />check</label>
+</fieldset>`;
+</script>
+            <pre><code-text codeid="code_fieldset" codetype="html"></code-text></pre>
           </div>
         </div>
       </section>
@@ -325,14 +328,16 @@
             <p>前方一致で入力値にマッチするリストに絞られる。cssは効かない？</p>
           </div>
           <div class="code">
-            <pre>
-<code class="language-html">&lt;input list="list-colors"/&gt;
-&lt;datalist id="list-colors"&gt;
-  &lt;option value="red" /&gt;
-  &lt;option value="blue" /&gt;
-  &lt;option value="green" /&gt;
-  &lt;option value="black" /&gt;
-&lt;/datalist&gt;</code></pre>
+<script>
+source.code_datalist = `<input list="list-colors"/>
+<datalist id="list-colors">
+  <option value="red" />
+  <option value="blue" />
+  <option value="green" />
+  <option value="black" />
+</datalist>`;
+</script>
+            <pre><code-text codeid="code_datalist" codetype="html"></code-text></pre>
           </div>
         </div>
       </section>
@@ -354,19 +359,21 @@
             </select>
           </div>
           <div class="code">
-            <pre>
-<code class="language-html">&lt;select&gt;
-  &lt;optgroup label="東京都"&gt;
-    &lt;option&gt;北区&lt;/option&gt;
-    &lt;option&gt;新宿区&lt;/option&gt;
-    &lt;option&gt;豊島区&lt;/option&gt;
-  &lt;/optgroup&gt;
-  &lt;optgroup label="埼玉県"&gt;
-    &lt;option&gt;さいたま市&lt;/option&gt;
-    &lt;option&gt;浦和市&lt;/option&gt;
-    &lt;option&gt;川口市&lt;/option&gt;
-  &lt;/optgroup&gt;
-&lt;/select&gt;</code></pre>
+<script>
+source.code_optgroup = `<select>
+  <optgroup label="東京都">
+    <option>北区</option>
+    <option>新宿区</option>
+    <option>豊島区</option>
+  </optgroup>
+  <optgroup label="埼玉県">
+    <option>さいたま市</option>
+    <option>浦和市</option>
+    <option>川口市</option>
+  </optgroup>
+</select>`;
+</script>
+            <pre><code-text codeid="code_optgroup" codetype="html"></code-text></pre>
           </div>
         </div>
       </section>
@@ -398,17 +405,18 @@
                 </label>
               </li>
             </ul>
-            <pre>
-<code class="language-html" id="html_1">&lt;form&gt;
-  &lt;input placeholder="プレースホルダー" required /&gt;
-  &lt;input type="tel" pattern="^0[1-9][0-9]?-\d{3,4}-\d{3,4}$" title="電話番号の形式で入力してください" /&gt;
-  &lt;input value="読み取り専用" readonly /&gt;
-  &lt;div&gt;
-    &lt;input type="radio" name="a" value="1" required /&gt; 犬
-    &lt;input type="radio" name="a" value="2" /&gt; 猫
-  &lt;/div&gt;
-  &lt;button type="submit"&gt;submit&lt;/button&gt;
-&lt;/form&gt;</code><code class="language-css" id="css_1">input:invalid {
+<script>
+source.html_1 = `<form>
+  <input placeholder="プレースホルダー" required />
+  <input type="tel" pattern="^0[1-9][0-9]?-\d{3,4}-\d{3,4}$" title="電話番号の形式で入力してください" />
+  <input value="読み取り専用" readonly />
+  <div>
+    <input type="radio" name="a" value="1" required /> 犬
+    <input type="radio" name="a" value="2" /> 猫
+  </div>
+  <button type="submit">submit</button>
+</form>`;
+source.css_1 = `input:invalid {
   border-color: red;
   background-color: #fcc;
 }
@@ -418,7 +426,9 @@ input:valid {
 }
 input:read-only {
   background-color: #eee;
-}</code></pre>
+}`;
+</script>
+            <pre><code-text codeid="html_1" codetype="html"></code-text><code-text class="language-css" codeid="css_1" codetype="css"></code-text></pre>
           </div>
         </div>
       </section>

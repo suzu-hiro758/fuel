@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/dialog.css">
     <link href="../lib/prism/prism.css" rel="stylesheet" /> 
     <script defer src="../assets/js/dialog.js"></script>
+    <script src="../assets/js/main.js"></script>
   </head>
   <body>
     <h1 class="title">HTML ダイアログ <a href="../">TOP</a></h1>
@@ -17,18 +18,20 @@
       <div style="margin-top: 10px;">
         <textarea id="output"></textarea>
       </div>
-      <pre>
-<code class="language-html">&lt;dialog id="dialog"&gt;
-  &lt;header&gt;タイトル&lt;span class="close-icon"&gt;X&lt;/span&gt;&lt;/header&gt;
-  &lt;section&gt;
-    &lt;div&gt;何か書く&lt;/div&gt;
-    &lt;textarea id="modal-text"&gt;&lt;/textarea&gt;
-  &lt;/section&gt;
-  &lt;div class="buttons"&gt;
-    &lt;button id="close-button"&gt;閉じる&lt;/button&gt;
-    &lt;button id="submit-button"&gt;保存&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
+<script>
+source.code_dialog = `<dialog id="dialog">
+  <header>タイトル<span class="close-icon">X</span></header>
+  <section>
+    <div>何か書く</div>
+    <textarea id="modal-text"></textarea>
+  </section>
+  <div class="buttons">
+    <button id="close-button">閉じる</button>
+    <button id="submit-button">保存</button>
+  </div>
+</dialog>`;
+</script>
+      <pre><code-text codeid="code_dialog" codetype="html"></code-text></pre>
       <pre>
 <code class="language-css">dialog {
   width: 400px;
