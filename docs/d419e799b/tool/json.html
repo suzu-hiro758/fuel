@@ -13,6 +13,10 @@
         height: 250px;
         margin: 10px 0;
       }
+      .buttons {
+        display: flex;
+        gap: 10px;
+      }
     </style>
   </head>
   <body>
@@ -27,11 +31,17 @@
             <option value="t">\t</option>
           </select>
           <br/>
-          <textarea id="in"></textarea>
+          <textarea id="in" placeholder="整形前のJSON"></textarea>
           <br />
           <button id="btn">整形</button>
           <br/>
-          <textarea id="out"></textarea>
+          <textarea id="out" placeholder="整形後のJSON"></textarea>
+          <br/>
+          <div class="buttons">
+            <button id="to_obj">↓ to Object</button>
+            <button id="to_json">↑ to JSON</button>
+          </div>
+          <textarea id="obj" placeholder="object"></textarea>
         </div>
       </section>
     </main>
@@ -40,6 +50,7 @@
         const sel = document.getElementById('sel')
         const input = document.getElementById('in')
         const out = document.getElementById('out')
+        const obj = document.getElementById('obj')
 
         const getSpace = () => {
           switch (sel.value) {
@@ -51,6 +62,14 @@
         document.getElementById('btn').addEventListener('click', () => {
           const value = JSON.stringify(JSON.parse(input.value), null, getSpace())
           out.value = value
+        })
+        document.getElementById('to_obj').addEventListener('click', () => {
+          if (!out.value) return;
+          obj.value = out.value.replace(/"([^"]+)"(?=\s*:)/g, '$1');
+        })
+        document.getElementById('to_json').addEventListener('click', () => {
+          if (!obj.value) return;
+          out.value = obj.value.replace(/(\w+)(?=\s*:)/g, '"$1"');
         })
       })
     </script>
