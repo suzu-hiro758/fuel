@@ -21,15 +21,17 @@
     </style>
   </head>
   <body>
-    <h1 class="title">TSVをHTMLのTABLEに変換<a href="../">TOP</a></h1>
+    <h1 class="title">TSVをMarkdownのTABLEに変換<a href="../">TOP</a></h1>
     <main class="tool_tsvpattern">
       <section>
-        <label>
-          <input type="radio" name="file_type" value="tsv" checked /> TSV 
-        </label>
-        <label>
-          <input type="radio" name="file_type" value="csv" /> CSV
-        </label>
+        <div>
+          <label>
+            <input type="radio" name="file_type" value="tsv" checked /> TSV 
+          </label>
+          <label>
+            <input type="radio" name="file_type" value="csv" /> CSV
+          </label>
+        </div>
         <textarea id="in"></textarea>
         <div>
           <button id="btn1">実行</button>
@@ -44,18 +46,19 @@
         const output = document.getElementById('out')
 
         document.getElementById('btn1').addEventListener('click', () => {
-          const lines = input.value.split(/\n/).filter(v => v.trim().length);
+          const lines = input.value.split('\n').filter(v => v.trim().length);
           if (lines.length === 0) return;
           const isTsv = document.querySelector('[name="file_type"]:checked').value === 'tsv'
           const divider = isTsv ? '\t' : ','
-  
-          output.value = '<table>\n';
+
+          output.value = "";
           lines.forEach((value, i) => {
-            const values = value.split(divider).map(v => isTsv ? v : v.trim().replace(/^"|"$/g, '').replaceAll('""', '"'))
-                    .map(v => i === 0 ? `<th>${v}</th>` : `<td>${v}</td>`).join('');
-            output.value += `<tr>${values}</tr>\n`;
+            const values = value.split(divider).map(v => isTsv ? v : v.trim().replace(/^"|"$/g, '').replaceAll('""', '"'));
+            output.value += `| ${values.join(' | ')} |\n`;
+            if (i === 0) {
+              output.value += `${new Array(values.length).fill('--').join('|')}\n`;
+            }
           });
-          output.value += '</table>';
         })
       })
     </script>
