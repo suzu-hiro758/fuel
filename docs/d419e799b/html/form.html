@@ -298,8 +298,8 @@
             <p>disabledにすると、全体がdisabledになってPOSTされなくなる</p>
           </div>
           <div class="code">
-<script>
-source.code_fieldset = `<fieldset>
+<template id="code_fieldset">
+<fieldset>
   <legend>通常</legend>
   <input />
   <label><input type="checkbox" />check</label>
@@ -308,7 +308,7 @@ source.code_fieldset = `<fieldset>
   <legend>disabled</legend>
   <input />
   <label><input type="checkbox" />check</label>
-</fieldset>`;
+</template>
 </script>
             <pre><code-text codeid="code_fieldset" codetype="html"></code-text></pre>
           </div>
@@ -328,15 +328,15 @@ source.code_fieldset = `<fieldset>
             <p>前方一致で入力値にマッチするリストに絞られる。cssは効かない？</p>
           </div>
           <div class="code">
-<script>
-source.code_datalist = `<input list="list-colors"/>
+<template id="code_datalist">
+<input list="list-colors"/>
 <datalist id="list-colors">
   <option value="red" />
   <option value="blue" />
   <option value="green" />
   <option value="black" />
-</datalist>`;
-</script>
+</datalist>
+</template>
             <pre><code-text codeid="code_datalist" codetype="html"></code-text></pre>
           </div>
         </div>
@@ -359,8 +359,8 @@ source.code_datalist = `<input list="list-colors"/>
             </select>
           </div>
           <div class="code">
-<script>
-source.code_optgroup = `<select>
+<template id="code_optgroup">
+<select>
   <optgroup label="東京都">
     <option>北区</option>
     <option>新宿区</option>
@@ -372,7 +372,7 @@ source.code_optgroup = `<select>
     <option>川口市</option>
   </optgroup>
 </select>`;
-</script>
+</template>
             <pre><code-text codeid="code_optgroup" codetype="html"></code-text></pre>
           </div>
         </div>
@@ -405,8 +405,8 @@ source.code_optgroup = `<select>
                 </label>
               </li>
             </ul>
-<script>
-source.html_1 = `<form>
+<template id="html_1">
+<form>
   <input placeholder="プレースホルダー" required />
   <input type="tel" pattern="^0[1-9][0-9]?-\d{3,4}-\d{3,4}$" title="電話番号の形式で入力してください" />
   <input value="読み取り専用" readonly />
@@ -415,8 +415,10 @@ source.html_1 = `<form>
     <input type="radio" name="a" value="2" /> 猫
   </div>
   <button type="submit">submit</button>
-</form>`;
-source.css_1 = `input:invalid {
+</form>
+</template>
+<template id="css_1">
+input:invalid {
   border-color: red;
   background-color: #fcc;
 }
@@ -427,7 +429,7 @@ input:valid {
 input:read-only {
   background-color: #eee;
 }`;
-</script>
+</template>
             <pre><code-text codeid="html_1" codetype="html"></code-text><code-text class="language-css" codeid="css_1" codetype="css"></code-text></pre>
           </div>
         </div>
