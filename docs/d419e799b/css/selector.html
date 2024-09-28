@@ -659,6 +659,28 @@ input::placeholder {
 
             <tr>
               <style>
+                #c-3-3-2 input:placeholder-shown {
+                  background: #ccf;
+                  border: 2px solid blue;
+                }
+              </style>
+              <td class="code">
+<pre><code class="language-css">// プレースホルダーが表示されている状態
+input:placeholder-shown {
+  background: #66f;
+  border: 2px solid blue;
+}</code></pre>
+              </td>
+              <td class="code">
+<pre><code class="language-html">&lt;input placeholder="こちらに入力..."&gt;</code></pre>
+              </td>
+              <td id="c-3-3-2">
+                <input placeholder="こちらに入力...">
+              </td>
+            </tr>
+
+            <tr>
+              <style>
                 #c-3-4::selection {
                   color: gold;
                   background-color: red;
