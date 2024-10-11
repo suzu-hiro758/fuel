@@ -1,0 +1,114 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <style>
+      .tool_json textarea {
+        width: 800px;
+        margin: 10px 0;
+
+        &:nth-of-type(1) {
+          height: 200px;
+        }
+        &:nth-of-type(2) {
+          height: 50px;
+        }
+        &:nth-of-type(3) {
+          height: 50px;
+        }
+        &:nth-of-type(4) {
+          height: 100px;
+        }
+        &:nth-of-type(5) {
+          height: 150px;
+        }
+      }
+      .buttons {
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">再帰チェック<a href="../">TOP</a></h1>
+    <main class="tool_json">
+      <section>
+        <div>
+          <div>JSON</div>
+<textarea id="data" placeholder="JSONデータ">
+{
+  "children": [
+    { "id": 1, "age": 10 },
+    { "id": 2, "age": 35 },
+    { "id": 3, "age": null },
+    { 
+      "children": [
+        { "id": 4, "age": 18 },
+        { "id": 5, "age": null }
+      ]
+    }
+  ]
+}
+</textarea>
+          <div>下の階層があるか判定</div>
+<textarea id="check_child" placeholder="return 'children' in d">
+return 'children' in d
+</textarea>
+          <div>子要素抽出</div>
+<textarea id="extract_child" placeholder="return d.children">
+return d.children
+</textarea>
+          <div>要素チェック</div>
+<textarea id="check" placeholder="if (d.xxx) return d.xxx">
+if (d.age === null) {
+  return JSON.stringify(d)
+}
+</textarea>
+          <br/>
+          <button id="btn">実行</button>
+          <br/>
+          <textarea id="out"></textarea>
+        </div>
+      </section>
+    </main>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('btn').addEventListener('click', () => {
+          const out = document.getElementById('out')
+          const haschildString = document.getElementById('check_child').value
+          const extractChildString = document.getElementById('extract_child').value
+          try {
+            const data = JSON.parse(document.getElementById('data').value)
+            const hasChild = new Function('d', haschildString)
+            const extractChild = new Function('d', extractChildString)
+            const check = new Function("d", document.getElementById('check').value)
+
+
+            const checkRecursive = (d) => {
+              if (hasChild(d)) {
+                extractChild(d).forEach(checkRecursive)
+                return
+              }
+              const ret = check(d)
+              if (ret)
+                out.value += `${ret}\n`
+            }
+
+            out.value = ''
+            const items = Array.isArray(data) ? data : [data]
+            items.forEach(checkRecursive)
+
+          } catch (e) {
+            out.value = e.message
+            throw e
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
