@@ -66,10 +66,12 @@ return d.children
           <div>要素チェック</div>
 <textarea id="check" placeholder="if (d.xxx) return d.xxx">
 if (d.age === null) {
-  return JSON.stringify(d)
+  return `階層:${f}, ${JSON.stringify(d)}`
 }
 </textarea>
           <br/>
+          <span style="color: #666; font-size: .8rem;">※ 各関数、第一引数は d はデータ、第2引数 f は階層</span>
+          <br/><br/>
           <button id="btn">実行</button>
           <br/>
           <textarea id="out"></textarea>
@@ -80,28 +82,31 @@ if (d.age === null) {
       window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('btn').addEventListener('click', () => {
           const out = document.getElementById('out')
-          const haschildString = document.getElementById('check_child').value
-          const extractChildString = document.getElementById('extract_child').value
+
           try {
             const data = JSON.parse(document.getElementById('data').value)
-            const hasChild = new Function('d', haschildString)
-            const extractChild = new Function('d', extractChildString)
-            const check = new Function("d", document.getElementById('check').value)
+            const hasChild = new Function('d', 'f', document.getElementById('check_child').value)
+            const extractChild = new Function('d', 'f', document.getElementById('extract_child').value)
+            const check = new Function("d", 'f', document.getElementById('check').value)
 
+            const countMap = new Map([[true, { count: 0 }], [false, { count: 0 }]])
 
-            const checkRecursive = (d) => {
-              if (hasChild(d)) {
-                extractChild(d).forEach(checkRecursive)
+            const checkRecursive = (d, f = 1) => {
+              if (hasChild(d, f)) {
+                extractChild(d, f).forEach(d => checkRecursive(d, f + 1))
                 return
               }
-              const ret = check(d)
+              const ret = check(d, f)
               if (ret)
                 out.value += `${ret}\n`
+                countMap.get(!!ret).count++
             }
 
             out.value = ''
             const items = Array.isArray(data) ? data : [data]
             items.forEach(checkRecursive)
+
+            out.value += `\n---------------------------------------\n要素チェック結果: true: ${countMap.get(true).count}, false: ${countMap.get(false).count}\n`
 
           } catch (e) {
             out.value = e.message
