@@ -18,8 +18,8 @@
       <div style="margin-top: 10px;">
         <textarea id="output"></textarea>
       </div>
-<script>
-source.code_dialog = `<dialog id="dialog">
+<template id="code_dialog">
+<dialog id="dialog">
   <header>タイトル<span class="close-icon">X</span></header>
   <section>
     <div>何か書く</div>
@@ -30,7 +30,7 @@ source.code_dialog = `<dialog id="dialog">
     <button id="submit-button">保存</button>
   </div>
 </dialog>`;
-</script>
+</template>
       <pre><code-text codeid="code_dialog" codetype="html"></code-text></pre>
       <pre>
 <code class="language-css">dialog {
