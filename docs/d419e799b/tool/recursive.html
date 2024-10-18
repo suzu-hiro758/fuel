@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/common_html.css">
     <link href="../lib/prism/prism.css" rel="stylesheet" /> 
     <style>
-      .tool_json textarea {
+      .tool_json section > div > textarea {
         width: 800px;
         margin: 10px 0;
 
@@ -16,21 +16,39 @@
           height: 200px;
         }
         &:nth-of-type(2) {
-          height: 50px;
-        }
-        &:nth-of-type(3) {
-          height: 50px;
-        }
-        &:nth-of-type(4) {
           height: 100px;
         }
-        &:nth-of-type(5) {
+        &:nth-of-type(3) {
           height: 150px;
+        }
+        &:nth-of-type(4) {
+          height: 200px;
         }
       }
       .buttons {
         display: flex;
         gap: 10px;
+      }
+      .wrapper {
+        width: 800px;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        > div {
+          flex-basis: 50%;
+        }
+        textarea {
+          width: 100%;
+          height: 60px;
+        }
+      }
+      details:has(#settings) {
+        width: 800px;
+        margin-block: 20px 10px;
+        #settings {
+          width: 800px;
+          height: 150px;
+        }
       }
     </style>
   </head>
@@ -55,26 +73,51 @@
   ]
 }
 </textarea>
-          <div>下の階層があるか判定</div>
+<div class="wrapper">
+    <div>
+      <div>下の階層があるか判定</div>
 <textarea id="check_child" placeholder="return 'children' in d">
 return 'children' in d
 </textarea>
+    </div>
+    <div>
           <div>子要素抽出</div>
 <textarea id="extract_child" placeholder="return d.children">
 return d.children
 </textarea>
-          <div>要素チェック</div>
+  </div>
+</div>
+        <div>要素処理</div>
 <textarea id="check" placeholder="if (d.xxx) return d.xxx">
+if (d.id in s) d.name = s[d.id]
+
 if (d.age === null) {
   return `階層:${f}, ${JSON.stringify(d)}`
 }
 </textarea>
           <br/>
           <span style="color: #666; font-size: .8rem;">※ 各関数、第一引数は d はデータ、第2引数 f は階層</span>
-          <br/><br/>
+          <br/>
+<details>
+  <summary>設定</summary>
+<textarea id="settings">
+{
+  "note": "sという変数名で、要素処理などでアクセスできます",
+  "1": "鈴木",
+  "2": "佐藤"
+}
+</textarea>
+</details>
+          
+          <br/>
           <button id="btn">実行</button>
           <br/>
+          <br/>
+          <div>ログ</div>
           <textarea id="out"></textarea>
+          <br/>
+          <div>処理後のデータ</div>
+          <textarea id="result"></textarea>
         </div>
       </section>
     </main>
@@ -82,12 +125,14 @@ if (d.age === null) {
       window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('btn').addEventListener('click', () => {
           const out = document.getElementById('out')
+          const result = document.getElementById('result')
 
           try {
             const data = JSON.parse(document.getElementById('data').value)
             const hasChild = new Function('d', 'f', document.getElementById('check_child').value)
             const extractChild = new Function('d', 'f', document.getElementById('extract_child').value)
-            const check = new Function("d", 'f', document.getElementById('check').value)
+            const check = new Function("d", 'f', 's', document.getElementById('check').value)
+            const settings = JSON.parse(document.getElementById('settings').value || '{}')
 
             const countMap = new Map([[true, { count: 0 }], [false, { count: 0 }]])
 
@@ -96,7 +141,7 @@ if (d.age === null) {
                 extractChild(d, f).forEach(d => checkRecursive(d, f + 1))
                 return
               }
-              const ret = check(d, f)
+              const ret = check(d, f, settings)
               if (ret)
                 out.value += `${ret}\n`
                 countMap.get(!!ret).count++
@@ -107,6 +152,8 @@ if (d.age === null) {
             items.forEach(checkRecursive)
 
             out.value += `\n---------------------------------------\n要素チェック結果: true: ${countMap.get(true).count}, false: ${countMap.get(false).count}\n`
+
+            result.value = JSON.stringify(data, null, 2)
 
           } catch (e) {
             out.value = e.message
