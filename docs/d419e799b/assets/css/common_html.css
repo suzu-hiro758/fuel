@@ -23,7 +23,7 @@ section {
   box-sizing: border-box;
   border: var(--container-border);
 }
-h2 {
+h2, h3 {
   margin: 0;
 }
 .viewer {

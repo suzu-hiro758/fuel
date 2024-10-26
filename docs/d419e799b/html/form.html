@@ -316,10 +316,11 @@
       </section>
       <section>
         <h2>datalist</h2>
+        <h3>テキスト</h3>
         <div class="content">
           <div class="viewer">
-            <input list="list-colors"/>
-            <datalist id="list-colors">
+            <input list="list-texts"/>
+            <datalist id="list-texts">
               <option value="red" />
               <option value="blue" />
               <option value="green" />
@@ -329,8 +330,8 @@
           </div>
           <div class="code">
 <template id="code_datalist">
-<input list="list-colors"/>
-<datalist id="list-colors">
+<input list="list-texts"/>
+<datalist id="list-texts">
   <option value="red" />
   <option value="blue" />
   <option value="green" />
@@ -338,6 +339,102 @@
 </datalist>
 </template>
             <pre><code-text codeid="code_datalist" codetype="html"></code-text></pre>
+          </div>
+        </div>
+        <h3>日付</h3>
+        <div class="content">
+          <div class="viewer">
+            <input type="date" list="list-dates" />
+            <datalist id="list-dates">
+              <option value="2024-10-24"></option>
+              <option value="2024-10-25"></option>
+              <option value="2024-10-26"></option>
+            </datalist>
+          </div>
+          <div class="code">
+<template id="code_datalist-date">
+<input type="date" list="datelist" />
+<datalist id="datelist">
+  <option value="2024-10-24"></option>
+  <option value="2024-10-25"></option>
+  <option value="2024-10-26"></option>
+</datalist>
+</template>
+            <pre><code-text codeid="code_datalist-date" codetype="html"></code-text></pre>
+          </div>
+        </div>
+        <h3>時刻</h3>
+        <div class="content">
+          <div class="viewer">
+            <input type="time" list="list-hours" />
+            <datalist id="list-hours">
+              <option value="12:00"></option>
+              <option value="13:00"></option>
+              <option value="14:00"></option>
+            </datalist>
+          </div>
+          <div class="code">
+<template id="code_datalist-time">
+<input type="time" list="list-hours" />
+<datalist id="list-hours">
+  <option value="12:00"></option>
+  <option value="13:00"></option>
+  <option value="14:00"></option>
+</datalist>
+</template>
+            <pre><code-text codeid="code_datalist-time" codetype="html"></code-text></pre>
+          </div>
+        </div>
+        <h3>色</h3>
+        <div class="content">
+          <div class="viewer">
+            <label for="colors">色を選択して下さい:</label>
+            <input type="color" list="list-colors" id="colors" />
+            <datalist id="list-colors">
+              <option value="#800000"></option>
+              <option value="#8B0000"></option>
+              <option value="#A52A2A"></option>
+              <option value="#DC143C"></option>
+            </datalist>
+          </div>
+          <div class="code">
+<template id="code_datalist-color">
+<label for="colors">色を選択して下さい:</label>
+<input type="color" list="list-colors" id="colors" />
+<datalist id="list-colors">
+  <option value="#800000"></option>
+  <option value="#8B0000"></option>
+  <option value="#A52A2A"></option>
+  <option value="#DC143C"></option>
+</datalist>
+</template>
+            <pre><code-text codeid="code_datalist-color" codetype="html"></code-text></pre>
+          </div>
+        </div>
+        <h3>範囲</h3>
+        <div class="content">
+          <div class="viewer">
+            <label for="tick">Tip amount:</label>
+            <input type="range" list="tickmarks" min="0" max="100" id="tick" name="tick" />
+            <datalist id="tickmarks">
+              <option value="0"></option>
+              <option value="10"></option>
+              <option value="20"></option>
+              <option value="30"></option>
+            </datalist>
+          </div>
+          <div class="code">
+<template id="code_datalist-range">
+<label for="tick">Tip amount:</label>
+<input type="range" list="tick-marks" min="0" max="100" id="tick" name="tick" />
+<datalist id="tick-marks">
+  <option value="0"></option>
+  <option value="10"></option>
+  <option value="20"></option>
+  <option value="30"></option>
+</datalist>
+</template>
+            <pre><code-text codeid="code_datalist-range" codetype="html"></code-text></pre>
           </div>
         </div>
       </section>
