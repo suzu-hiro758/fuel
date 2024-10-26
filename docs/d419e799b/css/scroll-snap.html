@@ -1,0 +1,185 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_css.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <script src="../assets/js/main.js"></script>
+    <style>
+      .css_scroll-snap {
+        --viewer-height: 280px;
+        .viewer {
+          display: block;
+          padding: 10px;
+        }
+      }
+      .section {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        scroll-padding: 0.5rem;
+        padding: 0.5rem;
+        max-width: var(--viewer-width);
+        .item {
+          display: flex;
+          height: 150px;
+        }
+        .item:nth-of-type(1) {
+          background-color: #ffe8e8;
+        }
+        .item:nth-of-type(2) {
+          background-color: #ffffdd;
+        }
+        .item:nth-of-type(3) {
+          background-color: #ffddff;
+        }
+        .item:nth-of-type(4) {
+          background-color: #e8ffe8;
+        }
+        .item:nth-of-type(5) {
+          background-color: #e8e8ff;
+        }
+      }
+      .sec-1 {
+        .content {
+          .section {
+            scroll-snap-type: x mandatory;
+            .item {
+              flex: 0 0 300px;
+              scroll-snap-align: start;
+            }
+          }
+        }
+      }
+      .sec-2 {
+        .content {
+          .section {
+            scroll-snap-type: x mandatory;
+            .item {
+              flex: 0 0 300px;
+              scroll-snap-align: center;
+            }
+          }
+        }
+      }
+      .sec-3 {
+        .content {
+          .section {
+            scroll-snap-type: x proximity;
+            .item {
+              flex: 0 0 300px;
+              scroll-snap-align: start;
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">scroll snap <a href="../">TOP</a></h1>
+    <main class="css_scroll-snap">
+      <section>
+        <h2>HTML</h2>
+<template id="code_sample">
+<div class="section">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+  <div class="item">Item 4</div>
+  <div class="item">Item 5</div>
+</div>
+</template>
+        <pre><code-text codeid="code_sample" codetype="html"></code-text></pre>
+      </div>
+      </section>
+      <section class="sec-1">
+        <h2>scroll-snap-type: x mandatory; scroll-snap-align: start;</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="section">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+              <div class="item">Item 5</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.section {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  .item {
+    display: flex;
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+  }
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-2">
+        <h2>scroll-snap-type: x mandatory; scroll-snap-align: center;</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="section">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+              <div class="item">Item 5</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.section {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  .item {
+    display: flex;
+    flex: 0 0 300px;
+    scroll-snap-align: center;
+  }
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-3">
+        <h2>scroll-snap-type: x proximity; scroll-snap-align: start;</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="section">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+              <div class="item">Item 5</div>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">.section {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  .item {
+    display: flex;
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+  }
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+  </body>
+</html>
