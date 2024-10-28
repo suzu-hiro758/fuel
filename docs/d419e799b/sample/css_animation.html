@@ -1,0 +1,123 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css_animation.css">
+
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <script src="../assets/js/main.js"></script>
+    <style>
+      h2 {
+        background-color: #eee;
+        padding: 4px 10px;
+      }
+      h3 {
+        margin-top: 1.8rem;
+        padding-left: 16px;
+        position: relative;
+        &::before {
+          position: relative;
+          content: '●';
+          right: 8px;
+          bottom: 1px;
+        }
+      }
+      section {
+        margin-bottom: 4rem;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.check').forEach(item => {
+          item.addEventListener('change', () => {
+            const animeElm = item.parentElement.nextElementSibling
+            if (item.checked) {
+              animeElm.classList.add('is-animated')
+            } else {
+              animeElm.classList.remove('is-animated')
+            }
+          })
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <h1 class="title">css animation <a href="../sample.html">TOP</a></h1>
+    <main>
+      <section>
+        <h2>表示</h2>
+        <h3>フェードイン <input class="check" type="checkbox" /></h3>
+        <div class="anim-box fadein anim"></div>
+        <h3>スライドイン <input class="check" type="checkbox" /></h3>
+        <div class="anim-box slidein anim"></div>
+        <h3>ズームイン <input class="check" type="checkbox" /></h3>
+        <div class="anim-box zoomin anim"></div>
+      </section>
+      <section>
+        <h2>ポップ</h2>
+        <h3>ぽよよんと跳ねる <input class="check" type="checkbox" /></h3>
+        <div class="anim-box poyoyon anim"></div>
+        <h3>ぽよよんと跳ねる2 <input class="check" type="checkbox" /></h3>
+        <div class="anim-box poyoyon2 anim"></div>
+        <h3>ぽよよんと跳ねる3</h3>
+        <div class="anim-box poyoyon3"></div>
+        <h3>ななめから出てくる <input class="check" type="checkbox" /></h3>
+        <div class="anim-box slide-skew anim"></div>
+        <h3>ポップアップ <input class="check" type="checkbox" /></h3>
+        <div class="anim-box popup anim"></div>
+        <h3>ぽよぽよ収縮する <input class="check" type="checkbox" /></h3>
+        <div class="anim-box poyopoyo anim"></div>
+      </section>
+      <section>
+        <h2>スタイリッシュ</h2>
+        <h3>きらん（ホバーしてみてください）</h3>
+        <div class="anim-box kiran"></div>
+        <h3>背景色が流れてくる</h3>
+        <div class="bg anim is-animated">
+          <span class="bg-wrap"><span class="inn">背景色が流れてくる</span></span><br>
+          <span class="bg-wrap"><span class="inn">アニメーション</span></span>
+        </div>
+        <h3>文字がぬるりと現れる <input class="check" type="checkbox" /></h3>
+        <div class="matrix anim">
+          <span class="bg-wrap"><span class="inn large">文字がぬるりと現れる</span></span>
+          <span class="bg-wrap"><span class="inn small">サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト<br>サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト<br>サンプルテキストサンプルテキストサンプルテキスト</span></span>
+        </div>
+        <h3>背景色が消えてから表示される <input class="check" type="checkbox" /></h3>
+        <div class="mask-bg anim">
+          背景色が消えてから表示される
+        </div>
+        <h3>線が伸びる <input class="check" type="checkbox" /></h3>
+        <div class="line anim"></div>
+
+      </section>
+      <section>
+        <h2>柔らかい</h2>
+        <h3>フェードアップ <input class="check" type="checkbox" /></h3>
+        <div class="anim-box fadeup anim"></div>
+        <h3>ボーダーが緩やかにつく <input class="check" type="checkbox" /></h3>
+        <div class="stroke anim">
+          <div class="border top"></div>
+          <div class="border right"></div>
+          <div class="border bottom"></div>
+          <div class="border left"></div>
+        </div>
+        <h3>文字が滑らかに表示される <input class="check" type="checkbox" /></h3>
+        <div class="smooth anim">
+          文字が滑らかに表示される
+        </div>
+        <h3>ゆったりスクロールボタン</h3>
+        <div class="scroll">
+          <span class="txt">Scroll</span>
+        </div>
+        <h3>ふわふわ揺れる</h3>
+        <div class="fuwafuwa"></div>
+        <h3>くるくる回りながら出現 <input class="check" type="checkbox" /></h3>
+        <div class="kurukuru anim"></div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+  </body>
+</html>
