@@ -1,0 +1,94 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <style>
+      .container {
+        position: relative;
+        width: 600px;
+        margin: 40px auto;
+        border: 1px solid #888;
+        .header {
+          position: sticky;
+          top: 0;
+          padding: .5rem 1rem;
+          background: #f1f1ff;
+          border-bottom: 1px solid #888;
+          font-weight: 700;
+          font-size: 1.2rem;
+        }
+        .footer {
+          position: sticky;
+          bottom: 0;
+          padding: .5rem 1rem;
+          background: #f1f1ff;
+          border-top: 1px solid #888;
+          font-weight: 700;
+          font-size: 1.2rem;
+        }
+        .content {
+          min-height: 400px;
+        }
+        section {
+          padding-bottom: 400px;
+          > div:nth-of-type(1) .content {
+            height: 700px;
+          }
+          > div:nth-of-type(3) .content {
+            height: 600px;
+          }
+          > div:nth-of-type(5) .content {
+            height: 800px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">css sticky header <a href="../sample.html">TOP</a></h1>
+    <main>
+      <section>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content">テストテストテストテストテストテストテストテスト</div>
+        </div>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content">テストテストテストテストテストテスト</div>
+        </div>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content">テストテストテストテストテストテストテストテスト</div>
+          <div class="footer">フッタ</div>
+        </div>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content">テストテストテストテストテストテストテストテスト</div>
+        </div>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content">テストテストテストテストテストテストテストテスト</div>
+        </div>
+        <div class="container">
+          <div class="header">
+            タイトル
+          </div>
+          <div class="content"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
