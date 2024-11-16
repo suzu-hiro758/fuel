@@ -3,6 +3,11 @@
    original base16 by Chris Kempson (https://github.com/chriskempson/base16)
 */
 
+pre.highlight {
+  padding: 12px;
+  background-color: #333;
+}
+
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {

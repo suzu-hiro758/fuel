@@ -27,3 +27,26 @@ h1 {
   <p>aa</p>
 </div>
 ```
+
+```ts
+type A = {
+  aaa: string;
+  bbb: boolean | null;
+}
+```
+
+| col1 | col2 |
+--|--
+| aa | bb |
+| cc | dd |
+
+
+
+<details>
+<summary>aaa</summary>
+
+あああ<br>
+いいいい
+
+</details>
+
