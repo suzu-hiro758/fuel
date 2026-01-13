@@ -11,9 +11,36 @@
         navigation: auto;
       }
 
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+@keyframes slide-in2 {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+ ::view-transition-old(photo-example-1) {
+  animation: slide-in 3s ease-out;
+}
+ ::view-transition-new(photo-example-1) {
+  visibility: hidden;
+}
+
       /* 写真1 */
       .photo-1 {
-        view-transition-name: photo-example-1;
+        /* view-transition-name: photo-example-1; */
         contain: paint;
       }
       /* 写真2 */
@@ -22,6 +49,26 @@
         contain: paint;
       }
     </style>
+    <script defer blocking="render">
+        window.addEventListener("pageswap", (event) => {
+          console.log('あ')
+        });
+        window.addEventListener('pagereveal', async e => {
+                    console.log('zああああああああああああ')
+
+          if (!e.viewTransition) return
+          const currentUrl =  new URL(navigation.activation.from.url)
+          console.log(currentUrl.pathname.endsWith('page-1.html'))
+          if (!currentUrl.pathname.endsWith('page-1.html')) return
+          const tgt = document.querySelector('.photo-1')
+
+          tgt.style.viewTransitionName = 'photo-example-1'
+
+          await e.viewTransition.finished
+
+          tgt.style.viewTransitionName = 'none'
+        })
+    </script>
   </head>
   <body>
     <main>

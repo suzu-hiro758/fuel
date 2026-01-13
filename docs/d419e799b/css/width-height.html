@@ -1,0 +1,268 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common_css.css">
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <script src="../assets/js/main.js"></script>
+    <style>
+      .css_width_height {
+        --viewer-height: 120px;
+        .viewer {
+          display: flex;
+          gap: 10px;
+          padding: 10px;
+          .div {
+            width: 240px;
+            height: calc(var(--viewer-height) - 24px);
+            border: 1px solid blue;
+          }
+          h4 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            background-color: #ccf;
+            padding: 0;
+            margin: 0;
+          }
+        }
+      }
+
+      .content + .content {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Wigth Height <a href="../">TOP</a></h1>
+    <main class="css_width_height">
+      <section>
+        <h4>HTML</h4>
+<template id="code_sample_1_1">
+<div>
+  <h6>Home Office</h6>
+</div>
+</template>
+        <pre><code-text codeid="code_sample_1_1" codetype="html"></code-text></pre>
+        <h4>CSS</h4>
+<template id="code_sample_1_2">h4 {
+  background-color: #ccf;
+  padding: 0;
+  margin: 0;
+}
+</template>
+        <pre><code-text codeid="code_sample_1_2" codetype="css"></code-text></pre>
+      </div>
+      </section>
+      <section class="sec-1">
+        <style>
+          .sec-1 {
+            .viewer {
+              .div {
+                display: block flow;
+              }
+              h4 {
+                width: auto;
+                height: auto;
+              }
+            }
+
+          }
+        </style>
+        <h2>h4のサイズが auto</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="div">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">div {
+  display: block flow;
+}
+</code></pre>
+          </div>
+        </div>
+        <div class="content">
+          <div class="viewer">
+            <div class="div" style="display: flex">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">div {
+  display: flex;
+}
+</code></pre>
+          </div>
+        </div>
+        <div class="content">
+          <div class="viewer">
+            <div class="div" style="display: grid">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">div {
+  display: grid;
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-2">
+        <style>
+          .sec-2 {
+            .viewer {
+              .div {
+                display: block;
+              }
+              h4 {
+                width: min-content;
+                height: min-content;
+              }
+            }
+
+          }
+        </style>
+        <h2>h4のサイズが min-content</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="div">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 50px;">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">h4 {
+  width: min-content;
+  height: min-content;
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-3">
+        <style>
+          .sec-3 {
+            .viewer {
+              .div {
+                display: block;
+              }
+              h4 {
+                width: max-content;
+                height: max-content;
+              }
+            }
+
+          }
+        </style>
+        <h2>h4のサイズが max-content</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="div">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 80px;">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">h4 {
+  width: max-content;
+  height: max-content;
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-4">
+        <style>
+          .sec-4 {
+            .viewer {
+              .div {
+                display: block;
+              }
+              h4 {
+                width: fit-content;
+                height: fit-content;
+              }
+            }
+
+          }
+        </style>
+        <h2>h4のサイズが fit-content</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="div">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 110px;">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 50px;">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">h4 {
+  width: fit-content;
+  height: fit-content;
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+      <section class="sec-5">
+        <style>
+          .sec-5 {
+            .viewer {
+              .div {
+                display: block;
+              }
+              h4 {
+                width: stretch;
+                height: stretch;
+              }
+            }
+
+          }
+        </style>
+        <h2>h4のサイズが stretch</h2>
+        <div class="content">
+          <div class="viewer">
+            <div class="div">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 110px;">
+              <h4>Home Office</h4>
+            </div>
+            <div class="div" style="width: 50px;">
+              <h4>Home Office</h4>
+            </div>
+          </div>
+          <div class="code">
+            <pre>
+<code class="language-css">h4 {
+  width: stretch;
+  height: stretch;
+}
+</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+    <script src="../assets/js/multicode.js"></script>
+  </body>
+</html>
