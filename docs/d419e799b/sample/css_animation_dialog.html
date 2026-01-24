@@ -1,0 +1,109 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf8" />
+    <meta name="robots" content="noindex">
+    <title>suzu-hiro note</title>
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css_animation.css">
+
+    <link href="../lib/prism/prism.css" rel="stylesheet" /> 
+    <script src="../assets/js/main.js"></script>
+    <style>
+      :root {
+        interpolate-size: allow-keywords;
+      }
+      #dialog {
+        width: 50px;
+        border-radius: 5px;
+        border: 1px solid #888;
+        padding: 0;
+        &::backdrop {
+          background-color: rgba(0 0 0 / .05);
+        }
+        header {
+          padding: 4px 12px;
+          border-radius: 5px 5px 5px 5px;
+          background: #ddd;
+        }
+        form {
+          padding-inline: 12px;
+          margin: 0;
+          display: flex;
+          height: 0;
+          flex-direction: column;
+          overflow: hidden;
+          button {
+            align-self: flex-end;
+            width: fit-content;
+          }
+        }
+      }
+      #dialog {
+        animation: fadeOut .6s ease-out forwards;
+        form {
+          animation: formOut .3s ease-out forwards;
+        }
+      }
+      #dialog[open] {
+        animation: fadeIn .3s ease-out forwards;
+        header {
+          animation: headerBorder .3s ease-out forwards;
+        }
+        form {
+          animation: formIn .3s ease-out forwards;
+          animation-delay: .3s;
+        }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); width: 50px; }
+        to { opacity: 1; transform: scale(1); width: 400px;  }
+      }
+      @keyframes headerBorder {
+        100% { border-radius: 5px 5px 0 0; }
+      }
+
+      @keyframes fadeOut {
+        from { display: block; opacity: 1; transform: scale(1); width: 400px; }
+        to { display: none; opacity: 0; transform: scale(0.9); width: 400px; }
+      }
+
+      @keyframes formIn {
+        from { opacity: 0; height: 0px; padding-block: 0; }
+        to { opacity: 1; height: auto; padding-block: 4px 8px; }
+      }
+      @keyframes formOut {
+        from { height: auto; }
+        to { height: auto ;}
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const openButton = document.getElementById('open')
+        const dialog = document.getElementById('dialog')
+        openButton.addEventListener('click', () => {
+          dialog.showModal()
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <h1 class="title">css animation dialog <a href="../sample.html">TOP</a></h1>
+    <main>
+      <section>
+        <button id="open">開く</button>
+        <dialog id="dialog">
+          <header>ヘッダー</header>
+          <form method="dialog">
+            <p>
+              テキスト<br/>
+              テキスト
+            </p>
+            <button tyoe="sudmit">閉じる</button>
+          </form>
+        </dialog>
+      </section>
+    </main>
+    <script src="../lib/prism/prism.js"></script>
+  </body>
+</html>
