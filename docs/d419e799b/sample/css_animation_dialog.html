@@ -65,7 +65,7 @@
         animation: openFade .3s ease-out forwards;
       }
       @keyframes openFade {
-        from { opacity: 0; transform: scale(0.9); }
+        from { opacity: 0; transform: scale(0.7); }
         to {  opacity: 1; transform: scale(1);  }
       }
 
@@ -75,7 +75,7 @@
       }
       @keyframes closeFade {
         from { display: block; opacity: 1; transform: scale(1); }
-        to { display: none; opacity: 0; transform: scale(0.9);  }
+        to { display: none; opacity: 0; transform: scale(0.7);  }
       }
 
       /**
@@ -110,7 +110,7 @@
 
       /** close */
       #dialog.two-step {
-        animation: close2step .3s ease-out .3s forwards;
+        animation: close2step .6s ease-out forwards;
         header {
           animation: close2stepHeader .3s ease-out forwards;
         }
@@ -119,8 +119,9 @@
         }
       }
       @keyframes close2step {
-        from { display: block; opacity: 1; transform: scale(1); width: 400px;  }
-        to { display: none; opacity: 0; transform: scale(0.9); width: 50px; }
+        0% { display: block; }
+        51% { opacity: 1; transform: scale(1); width: 400px;  }
+        100% { display: none; opacity: 0; transform: scale(0.9); width: 50px; }
       }
       @keyframes close2stepHeader {
         100% { border-radius: 5px 5px 5px 5px; }
