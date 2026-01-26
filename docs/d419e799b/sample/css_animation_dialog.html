@@ -13,8 +13,23 @@
       :root {
         interpolate-size: allow-keywords;
       }
+      .option {
+        display: flex;
+        margin-block: 1rem;
+        gap: 1rem;
+        flex-direction: column;
+        .r-group {
+          padding-block: 4px;
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          label {
+            cursor: pointer;
+          }
+        }
+      }
       #dialog {
-        width: 50px;
+        width: 400px;
         border-radius: 5px;
         border: 1px solid #888;
         padding: 0;
@@ -23,14 +38,15 @@
         }
         header {
           padding: 4px 12px;
-          border-radius: 5px 5px 5px 5px;
+          border-radius: 5px 5px 0 0;
           background: #ddd;
         }
-        form {
+        .content {
           padding-inline: 12px;
+          padding-block: 4px 8px;
           margin: 0;
           display: flex;
-          height: 0;
+
           flex-direction: column;
           overflow: hidden;
           button {
@@ -39,71 +55,129 @@
           }
         }
       }
-      #dialog {
-        animation: fadeOut .6s ease-out forwards;
-        form {
-          animation: formOut .3s ease-out forwards;
-        }
+
+      /**
+       * fade
+       */
+
+       /** open */
+      #dialog.fade[open] {
+        animation: openFade .3s ease-out forwards;
       }
-      #dialog[open] {
-        animation: fadeIn .3s ease-out forwards;
+      @keyframes openFade {
+        from { opacity: 0; transform: scale(0.9); }
+        to {  opacity: 1; transform: scale(1);  }
+      }
+
+      /** close */
+      #dialog.fade {
+        animation: closeFade .3s ease-out forwards;
+      }
+      @keyframes closeFade {
+        from { display: block; opacity: 1; transform: scale(1); }
+        to { display: none; opacity: 0; transform: scale(0.9);  }
+      }
+
+      /**
+       * 2-step
+       */
+
+
+      /** open */
+      #dialog.two-step[open] {
+        width: 50px;
+        animation: open2step .3s ease-out forwards;
         header {
-          animation: headerBorder .3s ease-out forwards;
+          border-radius: 5px 5px 5px 5px;
+          animation: open2stepHeader .3s ease-out forwards;
         }
-        form {
-          animation: formIn .3s ease-out forwards;
-          animation-delay: .3s;
+        .content {
+          height: 0;
+          animation: open2stepForm .3s ease-out .3s forwards;
         }
       }
-      @keyframes fadeIn {
+      @keyframes open2step {
         from { opacity: 0; transform: scale(0.9); width: 50px; }
         to { opacity: 1; transform: scale(1); width: 400px;  }
       }
-      @keyframes headerBorder {
+      @keyframes open2stepHeader {
         100% { border-radius: 5px 5px 0 0; }
       }
-
-      @keyframes fadeOut {
-        from { display: block; opacity: 1; transform: scale(1); width: 400px; }
-        to { display: none; opacity: 0; transform: scale(0.9); width: 400px; }
-      }
-
-      @keyframes formIn {
+      @keyframes open2stepForm {
         from { opacity: 0; height: 0px; padding-block: 0; }
         to { opacity: 1; height: auto; padding-block: 4px 8px; }
       }
-      @keyframes formOut {
-        from { height: auto; }
-        to { height: auto ;}
+
+      /** close */
+      #dialog.two-step {
+        animation: close2step .3s ease-out .3s forwards;
+        header {
+          animation: close2stepHeader .3s ease-out forwards;
+        }
+        .content {
+          animation: close2stepForm .3s ease-out forwards;
+        }
       }
+      @keyframes close2step {
+        from { display: block; opacity: 1; transform: scale(1); width: 400px;  }
+        to { display: none; opacity: 0; transform: scale(0.9); width: 50px; }
+      }
+      @keyframes close2stepHeader {
+        100% { border-radius: 5px 5px 5px 5px; }
+      }
+      @keyframes close2stepForm {
+        from { display: block; opacity: 1; height: auto; padding-block: 4px 8px; }
+        to { display: none; opacity: 0; height: 0px; padding-block: 0; }
+      }
+
     </style>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const openButton = document.getElementById('open')
-        const dialog = document.getElementById('dialog')
-        openButton.addEventListener('click', () => {
-          dialog.showModal()
-        })
-      })
-    </script>
   </head>
   <body>
     <h1 class="title">css animation dialog <a href="../sample.html">TOP</a></h1>
     <main>
-      <section>
-        <button id="open">開く</button>
-        <dialog id="dialog">
-          <header>ヘッダー</header>
-          <form method="dialog">
-            <p>
-              テキスト<br/>
-              テキスト
-            </p>
-            <button tyoe="sudmit">閉じる</button>
-          </form>
-        </dialog>
+      <button id="open" commandfor="dialog" command="show-modal">開く</button>
+
+      <section class="option">
+        <fieldset>
+          <legend>アニメーション種別</legend>
+          <div class="r-group">
+          </div>
+        </fieldset>
       </section>
     </main>
+    <dialog id="dialog" class="fade">
+      <header>ヘッダー</header>
+      <section class="content">
+        <p>
+          テキスト<br/>
+          テキスト
+        </p>
+        <button commandfor="dialog" command="close">閉じる</button>
+      </section>
+    </dialog>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const dialog = document.getElementById('dialog')
+        const radioGroup = document.querySelector('.r-group');
+        const types = ['fade', 'two-step']
+        const defaultType = types[0]
+
+        types.forEach(type => {
+          const label = document.createElement('label')
+          const input = document.createElement('input')
+          input.type = "radio";
+          input.name = "animetion-type";
+          input.value = type;
+          input.checked = type === defaultType
+          label.append(input)
+          label.append(type)
+          radioGroup.append(label)
+          input.addEventListener('change', () => {
+            dialog.className = type;
+          })
+        })
+      })
+    </script>
     <script src="../lib/prism/prism.js"></script>
   </body>
 </html>
