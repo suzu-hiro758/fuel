@@ -16,6 +16,10 @@ class CodeText extends HTMLElement {
     this.parentElement.appendChild(wrapper);
     this.parentElement.removeChild(this);
   }
+
+  apply() {
+    Prism.highlightAll();
+  }
 }
 
 customElements.define( 'code-text', CodeText );
