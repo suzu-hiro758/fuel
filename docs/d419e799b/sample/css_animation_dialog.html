@@ -93,49 +93,54 @@
 /** open */
 #dialog.two-step[open] {
   width: 50px;
-  animation: open2step .3s ease-out forwards;
+  animation: open2step .5s ease-out forwards;
   header {
     border-radius: 5px 5px 5px 5px;
-    animation: open2stepHeader .3s ease-out forwards;
+    animation: open2stepHeader .5s ease-out forwards;
   }
   .content {
     height: 0;
-    animation: open2stepForm .3s ease-out .3s forwards;
+    padding-block: 0;
+    animation: open2stepForm .5s ease-out .5s forwards;
   }
 }
 @keyframes open2step {
-  from { opacity: 0; transform: scale(0.9); width: 50px; }
-  to { opacity: 1; transform: scale(1); width: 400px;  }
+  0% { opacity: 0; width: 50px; }
+  65% { width: 480px; }
+  100% { opacity: 1; width: 400px;  }
 }
 @keyframes open2stepHeader {
   100% { border-radius: 5px 5px 0 0; }
 }
 @keyframes open2stepForm {
-  from { opacity: 0; height: 0px; padding-block: 0; }
-  to { opacity: 1; height: auto; padding-block: 4px 8px; }
+  0% { opacity: 0; }
+  65% { height: calc-size(auto, size + 30px); }
+  100% { opacity: 1; height: auto; padding-block: 4px 8px; }
 }
 
 /** close */
 #dialog.two-step {
-  animation: close2step .6s ease-out forwards;
+  animation: close2step .8s ease-out forwards;
   header {
-    animation: close2stepHeader .3s ease-out forwards;
+    animation: close2stepHeader .4s ease-out forwards;
   }
   .content {
-    animation: close2stepForm .3s ease-out forwards;
+    animation: close2stepForm .4s ease-out forwards;
   }
 }
 @keyframes close2step {
   0% { display: block; }
-  51% { opacity: 1; transform: scale(1); width: 400px;  }
-  100% { display: none; opacity: 0; transform: scale(0.9); width: 50px; }
+  51% { opacity: 1; width: 400px;  }
+  100% { display: none; opacity: 0; width: 50px; }
 }
 @keyframes close2stepHeader {
   100% { border-radius: 5px 5px 5px 5px; }
 }
 @keyframes close2stepForm {
-  from { display: block; opacity: 1; height: auto; padding-block: 4px 8px; }
-  to { display: none; opacity: 0; height: 0px; padding-block: 0; }
+  0% { display: flex; opacity: 1; height: auto; padding-block: 4px 8px; }
+  50% { height: 0px; padding-block: 0; }
+  70% { height: 30px; }
+  100% { display: none; opacity: 0; height: 0px; padding-block: 0; }
 }
 </style>
   </head>
@@ -166,7 +171,9 @@
       <section class="content">
         <p>
           テキスト<br/>
-          テキスト
+          テキストテキストテキストテキスト<br/>
+          テキストテキスト<br/>
+          テキストテキストテキスト
         </p>
         <button commandfor="dialog" command="close">閉じる</button>
       </section>
